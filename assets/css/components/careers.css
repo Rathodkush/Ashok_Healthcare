@@ -1,0 +1,284 @@
+/* ============================================================
+   ASHOK HEALTHCARE — CAREERS PAGE DESIGN SYSTEM
+   Premium styling for Job Cards, Interactive Filters, and
+   Direct Job Application Centerpiece
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   1. HERO SECTION & STATS
+   ------------------------------------------------------------ */
+.careers-hero-section {
+  position: relative;
+  background: linear-gradient(135deg, #091224 0%, #1e1b4b 55%, #0858a4 100%);
+  color: #ffffff;
+  padding: 4.5rem 0 3.5rem;
+  overflow: hidden;
+}
+
+.careers-hero-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(circle at 15% 25%, rgba(14, 165, 233, 0.15) 0%, transparent 45%),
+    radial-gradient(circle at 85% 75%, rgba(37, 211, 102, 0.1) 0%, transparent 40%),
+    radial-gradient(rgba(255, 255, 255, 0.08) 1.2px, transparent 1.2px);
+  background-size: 100% 100%, 100% 100%, 26px 26px;
+  pointer-events: none;
+}
+
+.careers-stat-badge {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 1rem;
+  padding: 0.85rem 1.15rem;
+  transition: all 0.3s ease;
+}
+
+.careers-stat-badge:hover {
+  background: rgba(255, 255, 255, 0.14);
+  transform: translateY(-3px);
+  border-color: rgba(255, 255, 255, 0.28);
+}
+
+/* ------------------------------------------------------------
+   2. CATEGORY FILTER TABS
+   ------------------------------------------------------------ */
+.careers-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-bottom: 2.5rem;
+}
+
+.career-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.25rem;
+  border-radius: 9999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--slate-700, #334155);
+  background: #ffffff;
+  border: 1px solid var(--slate-200, #e2e8f0);
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04);
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.career-tab-btn:hover {
+  background: #f8fafc;
+  color: var(--primary-600, #0858a4);
+  border-color: var(--primary-300, #93c5fd);
+  transform: translateY(-1px);
+}
+
+.career-tab-btn.active {
+  background: linear-gradient(135deg, var(--primary-600, #0858a4) 0%, var(--primary-700, #074783) 100%);
+  color: #ffffff;
+  border-color: var(--primary-600, #0858a4);
+  box-shadow: 0 6px 18px rgba(8, 88, 164, 0.28);
+}
+
+.career-tab-btn .badge {
+  font-size: 0.72rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 9999px;
+  background: rgba(0, 0, 0, 0.08);
+  color: inherit;
+}
+
+.career-tab-btn.active .badge {
+  background: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+}
+
+/* ------------------------------------------------------------
+   3. PREMIUM JOB CARDS
+   ------------------------------------------------------------ */
+.career-job-card {
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.85);
+  border-radius: 1.25rem;
+  padding: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+  transition: transform 350ms cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 350ms cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 250ms ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.career-job-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px -8px rgba(8, 88, 164, 0.16), 0 6px 14px -2px rgba(15, 23, 42, 0.06);
+  border-color: rgba(8, 88, 164, 0.4);
+}
+
+.career-job-card.is-urgent {
+  border-top: 4px solid var(--brand-red, #ec1a23);
+}
+
+.career-job-card.is-priority {
+  border-top: 4px solid var(--primary-600, #0858a4);
+}
+
+.career-pill-urgent {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.22rem 0.65rem;
+  border-radius: 9999px;
+  background-color: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #fca5a5;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.career-pill-salary {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #047857;
+  background: #d1fae5;
+  border: 1px solid #a7f3d0;
+  padding: 0.28rem 0.75rem;
+  border-radius: 9999px;
+}
+
+.career-specs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.65rem;
+  background: #f8fafc;
+  border: 1px solid #edf2f7;
+  border-radius: 0.85rem;
+  padding: 0.85rem;
+  margin: 1rem 0;
+}
+
+.career-spec-item {
+  font-size: 0.76rem;
+  line-height: 1.35;
+}
+
+.career-spec-label {
+  color: var(--slate-500, #64748b);
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.career-spec-value {
+  color: var(--slate-900, #0f172a);
+  font-weight: 700;
+}
+
+/* Accordion details drawer */
+.career-details-toggle {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--primary-600, #0858a4);
+  font-size: 0.82rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  cursor: pointer;
+  margin-bottom: 0.75rem;
+}
+
+.career-details-toggle:hover {
+  color: var(--primary-700, #074783);
+  text-decoration: underline;
+}
+
+.career-expandable-content {
+  display: none;
+  padding-top: 0.75rem;
+  border-top: 1px dashed var(--slate-200, #e2e8f0);
+  margin-bottom: 1rem;
+  animation: careerDrawerFade 0.25s ease forwards;
+}
+
+.career-expandable-content.is-open {
+  display: block;
+}
+
+@keyframes careerDrawerFade {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ------------------------------------------------------------
+   4. DIRECT JOB APPLICATION CENTERPIECE
+   ------------------------------------------------------------ */
+.direct-apply-section {
+  position: relative;
+  background-color: #f8fafc;
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(8, 88, 164, 0.05) 0%, transparent 45%),
+    radial-gradient(circle at 90% 80%, rgba(14, 165, 233, 0.06) 0%, transparent 45%),
+    radial-gradient(#cbd5e1 1.2px, transparent 1.2px);
+  background-size: 100% 100%, 100% 100%, 28px 28px;
+  padding: 5rem 0;
+}
+
+.direct-apply-card {
+  background: #ffffff;
+  border-radius: 1.5rem;
+  padding: 2.25rem;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 16px 44px -8px rgba(15, 23, 42, 0.08);
+  transition: all 0.3s ease;
+}
+
+.direct-apply-card.highlight-pulse {
+  animation: formPulseGlow 1.5s ease;
+}
+
+@keyframes formPulseGlow {
+  0% { box-shadow: 0 0 0 0 rgba(8, 88, 164, 0.6); }
+  50% { box-shadow: 0 0 0 12px rgba(8, 88, 164, 0); }
+  100% { box-shadow: 0 16px 44px -8px rgba(15, 23, 42, 0.08); }
+}
+
+.benefit-feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.35rem;
+}
+
+.benefit-feature-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 1.25rem;
+}
+
+.hr-contact-box {
+  background: linear-gradient(135deg, #091224 0%, #1e1b4b 100%);
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 25px rgba(2, 6, 23, 0.18);
+}

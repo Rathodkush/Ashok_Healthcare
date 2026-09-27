@@ -1,0 +1,43 @@
+/* ============================================================
+   ACCORDION & FAQ COMPONENT
+   ============================================================ */
+.faq-accordion-item {
+  background-color: #ffffff;
+  border-radius: 1rem;
+  border: 1px solid var(--slate-200, #e2e8f0);
+  margin-bottom: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+  transition: all 0.25s ease;
+}
+
+.faq-accordion-header {
+  padding: 1.15rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--slate-900, #0f172a);
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.2s ease;
+}
+
+.faq-accordion-header:hover {
+  background-color: var(--slate-50, #f8fafc);
+}
+
+.faq-accordion-body {
+  padding: 0 1.25rem 1.25rem 1.25rem;
+  color: var(--slate-600, #475569);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  border-top: 1px solid var(--slate-100, #f1f5f9);
+  padding-top: 0.85rem;
+  display: none;
+}
+
+.faq-accordion-item.active .faq-accordion-body {
+  display: block;
+}

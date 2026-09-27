@@ -1,0 +1,43 @@
+/* ============================================================
+   MODALS COMPONENT (BOOTSTRAP OVERRIDES)
+   ============================================================ */
+.modal-content-healthcare {
+  border-radius: 1.5rem;
+  border: 1px solid var(--slate-100, #f1f5f9);
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.modal-header-healthcare {
+  background: linear-gradient(135deg, var(--primary-600, #0858a4) 0%, var(--primary-500, #0A6EBD) 50%, #0284c7 100%);
+  color: #ffffff;
+  padding: 1.25rem 1.5rem;
+  border-bottom: none;
+}
+
+.modal-header-dark {
+  background: linear-gradient(135deg, var(--slate-900, #0f172a) 0%, var(--primary-900, #0c2f59) 100%);
+  color: #ffffff;
+  padding: 1.25rem 1.5rem;
+  border-bottom: none;
+}
+
+/* Form inputs */
+.form-control-custom,
+.form-select-custom {
+  width: 100%;
+  padding: 0.65rem 1rem;
+  font-size: 0.875rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--slate-200, #e2e8f0);
+  transition: all 0.2s ease;
+  background-color: #ffffff;
+  color: var(--slate-900, #0f172a);
+}
+
+.form-control-custom:focus,
+.form-select-custom:focus {
+  outline: none;
+  border-color: var(--primary-500, #0A6EBD);
+  box-shadow: 0 0 0 3px rgba(10, 110, 189, 0.15);
+}

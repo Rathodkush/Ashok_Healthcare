@@ -1,0 +1,97 @@
+<!-- Main Site Navigation Bar -->
+<header class="site-header">
+  <div class="top-bar">
+    <div class="container-max d-flex align-items-center justify-content-between">
+      <div class="d-flex align-items-center gap-3 text-slate-300">
+        <span class="d-none d-sm-inline-flex align-items-center gap-1 text-info fw-semibold">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          Yeshwanthpur, Bengaluru
+        </span>
+        <span class="d-inline-flex align-items-center gap-1.5 text-success fw-medium">
+          <span class="pulse-dot-green"></span>
+          24/7 Doorstep ICU &amp; Nursing Support
+        </span>
+      </div>
+      <div class="d-flex align-items-center gap-3">
+        <a href="tel:+917829753538" class="badge bg-primary text-white text-decoration-none px-3 py-1 rounded-pill fw-bold">
+          +91 78297 53538
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <nav class="main-navbar">
+    <div class="container-max d-flex align-items-center justify-content-between">
+      <a href="index.html" class="d-flex align-items-center text-decoration-none">
+        <img src="images/ashoklogoh-tras.png" alt="Ashok Home Healthcare Services" class="navbar-logo-img">
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <div class="d-none d-lg-flex align-items-center gap-1">
+        <a href="index.html" class="nav-item-link" data-nav="home">Home</a>
+        <a href="about.html" class="nav-item-link" data-nav="about">About Us</a>
+
+        <div class="nav-dropdown">
+          <a href="services.html" class="nav-item-link" data-nav="services">
+            Services
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+          </a>
+          <div class="mega-menu">
+            <a href="services/home-nursing.html" class="mega-menu-item">
+              <span class="mega-menu-item-title">Home Nursing Care</span>
+              <span class="mega-menu-item-desc">Registered GNM &amp; B.Sc nurses (12h/24h)</span>
+            </a>
+            <a href="services/home-icu.html" class="mega-menu-item">
+              <span class="mega-menu-item-title">Home ICU Setup</span>
+              <span class="mega-menu-item-desc">Ventilators, multipara monitors &amp; critical care</span>
+            </a>
+            <a href="services/rehabilitation.html" class="mega-menu-item">
+              <span class="mega-menu-item-title">Neuro &amp; Ortho Rehab</span>
+              <span class="mega-menu-item-desc">Stroke, spinal cord &amp; trauma recovery</span>
+            </a>
+            <a href="services/physiotherapy.html" class="mega-menu-item">
+              <span class="mega-menu-item-title">Physiotherapy at Home</span>
+              <span class="mega-menu-item-desc">Post-surgery mobility &amp; pain relief</span>
+            </a>
+            <a href="services/elder-care.html" class="mega-menu-item">
+              <span class="mega-menu-item-title">Elder Care &amp; Palliative</span>
+              <span class="mega-menu-item-desc">Senior care &amp; medication assistance</span>
+            </a>
+            <a href="services/diagnostic-services.html" class="mega-menu-item">
+              <span class="mega-menu-item-title">Diagnostic Lab Tests</span>
+              <span class="mega-menu-item-desc">Doorstep blood &amp; sample collection</span>
+            </a>
+            <a href="services/ambulance.html" class="mega-menu-item">
+              <span class="mega-menu-item-title">24/7 ALS Ambulance</span>
+              <span class="mega-menu-item-desc">Advanced life support patient transport</span>
+            </a>
+            <a href="services.html" class="mega-menu-item">
+              <span class="mega-menu-item-title text-primary">All Healthcare Services</span>
+              <span class="mega-menu-item-desc">Explore full service spectrum</span>
+            </a>
+          </div>
+        </div>
+
+        <a href="products.html" class="nav-item-link" data-nav="products">Equipment &amp; Products</a>
+        <a href="gallery.html" class="nav-item-link" data-nav="gallery">Gallery</a>
+        <a href="careers.html" class="nav-item-link" data-nav="careers">Careers</a>
+        <a href="contact.html" class="nav-item-link" data-nav="contact">Contact</a>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="d-none d-lg-flex align-items-center gap-2">
+        <button type="button" onclick="openAssessmentModal('Home Healthcare')" class="btn-primary-custom" style="padding: 0.65rem 1.4rem; font-size: 0.85rem;">
+          Book Assessment
+        </button>
+      </div>
+
+      <!-- Mobile Trigger -->
+      <div class="d-flex align-items-center gap-2 d-lg-none">
+        <button type="button" onclick="openAssessmentModal('Home Healthcare')" class="btn btn-primary btn-sm rounded-pill fw-bold px-3">Book Care</button>
+        <button type="button" id="mobileMenuToggle" class="btn btn-light rounded-3 p-2" aria-label="Toggle navigation">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+</header>

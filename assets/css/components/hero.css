@@ -1,0 +1,315 @@
+/* ============================================================
+   HERO SECTION & FLOATING BADGES COMPONENT
+   ============================================================ */
+.hero-section {
+  position: relative;
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  background-color: var(--hero-bg, #EBF4FF);
+  overflow: hidden;
+  padding-top: 6.5rem;
+  padding-bottom: 3rem;
+}
+
+.hero-mandala-1 {
+  position: absolute;
+  left: -8%;
+  top: 10%;
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  border: 2px solid rgba(10, 110, 189, 0.15);
+  pointer-events: none;
+}
+
+.hero-mandala-2 {
+  position: absolute;
+  left: -4%;
+  top: 8%;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(10, 110, 189, 0.2);
+  pointer-events: none;
+}
+
+.hero-mandala-3 {
+  position: absolute;
+  right: 2%;
+  top: 5%;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(10, 110, 189, 0.12);
+  pointer-events: none;
+}
+
+.hero-image-wrapper {
+  position: relative;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-doctor-img {
+  position: relative;
+  z-index: 2;
+  max-width: 100%;
+  height: auto;
+  max-height: 540px;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 35px rgba(10, 80, 160, 0.16));
+  transition: transform 0.4s ease;
+}
+
+.hero-doctor-img:hover {
+  transform: scale(1.02);
+}
+
+.floating-badge {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 1rem;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08), 0 4px 6px rgba(0, 0, 0, 0.04);
+  padding: 0.65rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  z-index: 20;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.floating-badge:hover {
+  transform: translateY(-4px) scale(1.04) !important;
+  box-shadow: 0 18px 36px rgba(10, 110, 189, 0.16);
+  border-color: rgba(10, 110, 189, 0.3);
+}
+
+.floating-badge-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.floating-badge:hover .floating-badge-icon {
+  transform: scale(1.12);
+}
+
+.badge-float-up {
+  animation: floatUp 4s ease-in-out infinite;
+}
+
+.badge-float-down {
+  animation: floatDown 5s ease-in-out infinite;
+}
+
+.badge-float-up-delayed {
+  animation: floatUp 4.5s ease-in-out infinite 1s;
+}
+
+.badge-float-down-delayed {
+  animation: floatDown 3.8s ease-in-out infinite 0.8s;
+}
+
+@keyframes floatUp {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-9px);
+  }
+}
+
+@keyframes floatDown {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+/* Page Banner Sections */
+.page-banner-section {
+  background-color: var(--slate-950, #020617);
+  position: relative;
+  overflow: hidden;
+  padding-top: 5.5rem;
+}
+
+.page-banner-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.breadcrumb-custom {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--slate-400, #94a3b8);
+  margin-bottom: 0.75rem;
+}
+
+.breadcrumb-custom a {
+  color: var(--primary-300, #88c5ff);
+  text-decoration: none;
+}
+
+.breadcrumb-custom a:hover {
+  color: #ffffff;
+}
+
+/* Hero Trust Pills (Base) */
+.hero-pill-support,
+.hero-pill-rating {
+  position: absolute;
+  cursor: default;
+  user-select: none;
+  transition: transform 0.3s ease;
+}
+
+.hero-pill-support {
+  top: 43%;
+  left: -6%;
+}
+
+.hero-pill-rating {
+  top: 39%;
+  right: -6%;
+}
+
+/* Tablet: scale down floating badges slightly to maintain breathing room */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .hero-section {
+    padding-top: 5.5rem;
+    min-height: auto;
+  }
+  
+  .hero-image-wrapper {
+    max-width: 440px;
+  }
+
+  .floating-badge {
+    padding: 0.45rem 0.75rem;
+    font-size: 0.85rem;
+  }
+
+  .hero-pill-support {
+    left: -2%;
+    top: 44%;
+    transform: scale(0.9);
+  }
+
+  .hero-pill-rating {
+    right: -2%;
+    top: 40%;
+    transform: scale(0.9);
+  }
+}
+
+/* Mobile: Doctor fully unobstructed, trust pills at top corners, and 2x2 badge grid below */
+@media (max-width: 767.98px) {
+  .hero-section {
+    padding-top: 5rem;
+    padding-bottom: 2.5rem;
+    min-height: auto;
+    overflow-x: hidden;
+  }
+
+  .hero-doctor-img {
+    max-height: 350px;
+    width: auto;
+    margin: 0 auto;
+    filter: drop-shadow(0 12px 24px rgba(10, 80, 160, 0.14));
+  }
+
+  /* Reposition trust pills to top corners away from the doctor's face and body */
+  .hero-pill-support {
+    top: 12px !important;
+    left: 8px !important;
+    font-size: 11.5px !important;
+    padding: 0.35rem 0.75rem !important;
+  }
+
+  .hero-pill-rating {
+    top: 12px !important;
+    right: 8px !important;
+    font-size: 11.5px !important;
+    padding: 0.35rem 0.75rem !important;
+  }
+
+  @media (max-width: 420px) {
+    .hero-pill-support,
+    .hero-pill-rating {
+      font-size: 10px !important;
+      padding: 0.25rem 0.5rem !important;
+      top: 8px !important;
+    }
+    .hero-pill-support { left: 4px !important; }
+    .hero-pill-rating { right: 4px !important; }
+  }
+
+  /* Mobile quick service highlights grid */
+  .hero-badges-mobile-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.65rem;
+    margin-top: 1.25rem;
+    width: 100%;
+    text-align: left;
+  }
+
+  .hero-badges-mobile-grid .floating-badge {
+    position: static !important;
+    animation: none !important;
+    padding: 0.65rem 0.75rem !important;
+    width: 100%;
+    border-radius: 0.85rem !important;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06) !important;
+    transform: none !important;
+  }
+
+  .hero-badges-mobile-grid .floating-badge:active {
+    transform: scale(0.97) !important;
+  }
+
+  .hero-badges-mobile-grid .floating-badge-icon {
+    width: 2.1rem !important;
+    height: 2.1rem !important;
+    border-radius: 0.55rem !important;
+  }
+
+  .hero-badges-mobile-grid .floating-badge-icon svg {
+    width: 17px !important;
+    height: 17px !important;
+  }
+
+  .hero-mandala-1,
+  .hero-mandala-2,
+  .hero-mandala-3 {
+    opacity: 0.4;
+  }
+}
+
+@media (min-width: 768px) {
+  .hero-badges-mobile-grid {
+    display: none !important;
+  }
+}
+
+

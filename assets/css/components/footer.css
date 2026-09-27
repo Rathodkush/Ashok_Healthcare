@@ -1,0 +1,62 @@
+/* ============================================================
+   FOOTER COMPONENT (DARK THEME)
+   ============================================================ */
+.site-footer,
+.footer-custom {
+  background-color: #020617 !important;
+  color: #cbd5e1 !important;
+  border-top: 1px solid #1e293b;
+  position: relative;
+  z-index: 10;
+  padding-top: 4rem;
+  padding-bottom: 2rem;
+}
+
+.site-footer a,
+.footer-custom a {
+  color: #94a3b8;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.site-footer a:hover,
+.footer-custom a:hover {
+  color: #ffffff;
+}
+
+.site-footer .text-slate-400,
+.footer-custom .text-slate-400 {
+  color: #94a3b8 !important;
+}
+
+.site-footer .text-slate-300,
+.footer-custom .text-slate-300 {
+  color: #cbd5e1 !important;
+}
+
+.site-footer .border-slate-800,
+.footer-custom .border-slate-800 {
+  border-color: #1e293b !important;
+}
+
+.site-footer .bg-slate-900,
+.footer-custom .bg-slate-900 {
+  background-color: #0f172a !important;
+}
+
+.footer-logo-badge {
+  background-color: #ffffff;
+  padding: 0.5rem 1rem;
+  border-radius: 0.85rem;
+  display: inline-block;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  margin-bottom: 1.25rem;
+}
+
+.footer-logo-badge img {
+  height: 42px;
+  width: auto;
+  max-width: 240px;
+  object-fit: contain;
+  display: block;
+}

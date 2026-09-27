@@ -1,0 +1,219 @@
+<!-- Interactive Modals Component -->
+
+<!-- 1. Quick Assessment Modal -->
+<div class="modal fade" id="quickAssessmentModal" tabindex="-1" aria-labelledby="quickAssessmentModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content modal-content-healthcare">
+      <!-- Header -->
+      <div class="modal-header modal-header-healthcare">
+        <div class="d-flex align-items-center gap-3">
+          <span class="fs-4">🩺</span>
+          <div>
+            <h3 class="modal-title h5 fw-bold text-white mb-0" id="quickAssessmentModalLabel">Get Free Home Care Assessment</h3>
+            <p class="text-white-50 text-xs mb-0">Clinical supervisor connects with you within 15 minutes</p>
+          </div>
+        </div>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <!-- Body Form View -->
+      <div class="modal-body p-4" id="assessmentFormView">
+        <form id="assessmentForm">
+          <div class="row g-3 mb-3">
+            <div class="col-sm-6">
+              <label class="form-label text-xs fw-bold text-uppercase text-slate-700">Your Name *</label>
+              <input type="text" id="assessmentName" class="form-control form-control-custom" placeholder="e.g. Ramesh Kumar" required>
+            </div>
+            <div class="col-sm-6">
+              <label class="form-label text-xs fw-bold text-uppercase text-slate-700">Mobile Number *</label>
+              <input type="tel" id="assessmentPhone" class="form-control form-control-custom" pattern="[0-9]{10}" placeholder="10-digit mobile number" required>
+            </div>
+          </div>
+
+          <div class="row g-3 mb-3">
+            <div class="col-sm-6">
+              <label class="form-label text-xs fw-bold text-uppercase text-slate-700">Service Required *</label>
+              <select id="assessmentServiceSelect" class="form-select form-select-custom" required>
+                <option value="Home Nursing Care">Home Nursing Care</option>
+                <option value="Home ICU Setup">Home ICU Setup</option>
+                <option value="Neuro &amp; Ortho Rehabilitation">Neuro &amp; Ortho Rehabilitation</option>
+                <option value="Physiotherapy at Home">Physiotherapy at Home</option>
+                <option value="Elder Care / Palliative Care">Elder Care / Palliative Care</option>
+                <option value="Medical Equipment Rental/Sales">Medical Equipment Rental/Sales</option>
+                <option value="Emergency Ambulance (ALS)">Emergency Ambulance (ALS)</option>
+                <option value="Diagnostic Tests at Home">Diagnostic Tests at Home</option>
+              </select>
+            </div>
+            <div class="col-sm-6">
+              <label class="form-label text-xs fw-bold text-uppercase text-slate-700">Area / Location in Bengaluru</label>
+              <input type="text" id="assessmentLocation" class="form-control form-control-custom" placeholder="e.g. Yeshwanthpur, Hebbal...">
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label text-xs fw-bold text-uppercase text-slate-700">Patient Condition / Requirements (Optional)</label>
+            <textarea id="assessmentCondition" class="form-control form-control-custom" rows="3" placeholder="e.g. Post-surgery patient needing 24/7 nursing and oxygen support..."></textarea>
+          </div>
+
+          <div class="py-2 border-top d-flex align-items-center justify-content-between text-xs text-slate-500 mb-3">
+            <span class="text-success fw-bold">✓ Certified Clinical Nurses</span>
+            <span>🔒 100% Medical Confidentiality</span>
+          </div>
+
+          <div class="d-flex flex-column flex-sm-row gap-2">
+            <button type="submit" class="btn-primary-custom flex-grow-1">Request Free Assessment</button>
+            <button type="button" id="assessmentWhatsAppBtn" class="btn-whatsapp-custom">WhatsApp Direct</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Success Confirmation View -->
+      <div class="modal-body p-4 text-center d-none" id="assessmentSuccessView">
+        <div class="rounded-circle bg-success bg-opacity-10 text-success d-inline-flex align-items-center justify-content-center p-3 mb-3" style="width: 64px; height: 64px;">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h4 class="fw-bold text-slate-900 mb-2">Request Received Successfully!</h4>
+        <p class="text-slate-600 small mb-4">
+          Thank you, <strong id="assessmentConfirmName">Patient</strong>. Our Clinical Supervisor will call you at <strong id="assessmentConfirmPhone">+91-XXXXXXXXXX</strong> shortly to arrange your assessment.
+        </p>
+        <div class="d-flex justify-content-center gap-2">
+          <button type="button" id="assessmentSuccessWhatsAppBtn" class="btn-whatsapp-custom">Open in WhatsApp</button>
+          <button type="button" class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 2. Equipment Quote / Booking Modal -->
+<div class="modal fade" id="equipmentQuoteModal" tabindex="-1" aria-labelledby="equipmentQuoteModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content modal-content-healthcare">
+      <div class="modal-header modal-header-dark">
+        <div>
+          <div class="text-xs text-uppercase tracking-wider text-primary" id="eqModalCategory">Ashok Surgical Equipment Hub</div>
+          <h3 class="modal-title h5 fw-bold text-white mb-0" id="eqModalProductName">Medical Equipment Quote</h3>
+        </div>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body p-4" id="eqFormView">
+        <!-- Rent vs Buy Toggle -->
+        <div class="d-flex p-1 bg-light rounded-3 mb-3 border">
+          <button type="button" id="eqModeRentBtn" class="btn btn-sm flex-grow-1 rounded-2 fw-bold bg-primary-600 text-white">Rent Option</button>
+          <button type="button" id="eqModeBuyBtn" class="btn btn-sm flex-grow-1 rounded-2 fw-bold bg-white text-slate-700">Purchase Option</button>
+        </div>
+
+        <form id="equipmentQuoteForm">
+          <input type="hidden" id="eqModalItemName" value="">
+          
+          <div class="mb-3" id="eqDurationWrapper">
+            <label class="form-label text-xs fw-bold text-uppercase text-slate-700">Rental Duration</label>
+            <select id="eqDurationSelect" class="form-select form-select-custom">
+              <option value="1 Week">1 Week Trial</option>
+              <option value="15 Days">15 Days</option>
+              <option value="1 Month" selected>1 Month Plan (Popular)</option>
+              <option value="3 Months+">Long Term (3+ Months)</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label text-xs fw-bold text-uppercase text-slate-700">Your Full Name *</label>
+            <input type="text" id="eqCustomerName" class="form-control form-control-custom" placeholder="e.g. Anand Murthy" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label text-xs fw-bold text-uppercase text-slate-700">Phone Number *</label>
+            <input type="tel" id="eqCustomerPhone" class="form-control form-control-custom" pattern="[0-9]{10}" placeholder="10-digit mobile number" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label text-xs fw-bold text-uppercase text-slate-700">Delivery Locality in Bengaluru</label>
+            <input type="text" id="eqCustomerLocality" class="form-control form-control-custom" placeholder="e.g. Yeshwanthpur, Malleshwaram...">
+          </div>
+
+          <div class="text-xs text-muted mb-3">
+            🚚 Express doorstep delivery, sanitization certification, and technician demo included.
+          </div>
+
+          <button type="submit" class="btn-primary-custom w-100">Get Instant Rental / Buy Quote</button>
+        </form>
+      </div>
+
+      <div class="modal-body p-4 text-center d-none" id="eqSuccessView">
+        <div class="rounded-circle bg-success bg-opacity-10 text-success d-inline-flex align-items-center justify-content-center p-3 mb-3" style="width: 64px; height: 64px;">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h4 class="fw-bold text-slate-900 mb-2">Quote Request Sent!</h4>
+        <p class="text-slate-600 small mb-4">
+          We received your request for <strong id="eqConfirmProductName">Product</strong>. Our biomedical technician will call you at <strong id="eqConfirmPhone">+91-XXXXXXXXXX</strong>.
+        </p>
+        <button type="button" id="eqSuccessWhatsAppBtn" class="btn-whatsapp-custom">Continue on WhatsApp</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 3. Career Apply Modal -->
+<div class="modal fade" id="careerApplyModal" tabindex="-1" aria-labelledby="careerApplyModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content modal-content-healthcare">
+      <div class="modal-header modal-header-dark">
+        <div>
+          <div class="text-xs text-uppercase tracking-wider text-primary" id="careerModalJobTitle">Job Position</div>
+          <h3 class="modal-title h5 fw-bold text-white mb-0" id="careerModalQualification">Immediate Vacancy</h3>
+        </div>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body p-4" id="careerFormView">
+        <form id="careerApplyForm">
+          <input type="hidden" id="careerModalInputJob" value="">
+          <div class="mb-3">
+            <label class="form-label text-xs fw-bold text-uppercase text-slate-700">Applicant Full Name *</label>
+            <input type="text" id="careerApplicantName" class="form-control form-control-custom" placeholder="e.g. Priya Patil" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label text-xs fw-bold text-uppercase text-slate-700">Contact Number *</label>
+            <input type="tel" id="careerApplicantPhone" class="form-control form-control-custom" pattern="[0-9]{10}" placeholder="10-digit mobile number" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label text-xs fw-bold text-uppercase text-slate-700">Highest Qualification *</label>
+            <input type="text" id="careerApplicantQualification" class="form-control form-control-custom" placeholder="e.g. GNM / B.Sc Nursing / BPT / 10th Pass" required>
+          </div>
+
+          <div class="row g-2 mb-3">
+            <div class="col-6">
+              <label class="form-label text-xs fw-bold text-uppercase text-slate-700">Experience</label>
+              <select id="careerApplicantExperience" class="form-select form-select-custom">
+                <option value="Fresher">Fresher</option>
+                <option value="1-2 Years">1-2 Years</option>
+                <option value="3-5 Years">3-5 Years</option>
+                <option value="5+ Years">5+ Years</option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label class="form-label text-xs fw-bold text-uppercase text-slate-700">City / Area</label>
+              <input type="text" id="careerApplicantLocation" class="form-control form-control-custom" placeholder="Bengaluru">
+            </div>
+          </div>
+
+          <button type="submit" class="btn-primary-custom w-100">Submit Application</button>
+        </form>
+      </div>
+
+      <div class="modal-body p-4 text-center d-none" id="careerSuccessView">
+        <div class="rounded-circle bg-success bg-opacity-10 text-success d-inline-flex align-items-center justify-content-center p-3 mb-3" style="width: 64px; height: 64px;">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h4 class="fw-bold text-slate-900 mb-2">Application Received!</h4>
+        <p class="text-slate-600 small mb-4">
+          Thank you for applying for <strong id="careerConfirmJob">Role</strong>. Our HR recruitment lead will reach out to you directly.
+        </p>
+        <button type="button" id="careerSuccessWhatsAppBtn" class="btn-whatsapp-custom">Connect With HR on WhatsApp</button>
+      </div>
+    </div>
+  </div>
+</div>

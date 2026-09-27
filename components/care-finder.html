@@ -1,0 +1,51 @@
+<!-- Interactive Care Finder Triage Component -->
+<div class="care-finder-box" id="careFinderWidget">
+  <div class="row align-items-center g-3">
+    <div class="col-lg-3">
+      <div class="d-flex align-items-center gap-2">
+        <span class="fs-4">🧭</span>
+        <div>
+          <h4 class="fw-bold text-slate-900 mb-0 fs-6">Find Your Home Care</h4>
+          <p class="text-xs text-muted mb-0">Select condition for immediate dispatch</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Choice Chips -->
+    <div class="col-lg-6">
+      <div class="d-flex flex-wrap gap-2">
+        <button type="button" class="btn btn-sm btn-outline-primary rounded-pill care-option-btn selected" data-care-name="Home Nursing Care" data-care-id="home-nursing">
+          Nursing Care
+        </button>
+        <button type="button" class="btn btn-sm btn-outline-primary rounded-pill care-option-btn" data-care-name="Home ICU Setup" data-care-id="home-icu">
+          Home ICU Setup
+        </button>
+        <button type="button" class="btn btn-sm btn-outline-primary rounded-pill care-option-btn" data-care-name="Neuro & Ortho Rehabilitation" data-care-id="rehab">
+          Neuro Rehab
+        </button>
+        <button type="button" class="btn btn-sm btn-outline-primary rounded-pill care-option-btn" data-care-name="Elder Care & Palliative" data-care-id="elder-care">
+          Elder Care
+        </button>
+        <button type="button" class="btn btn-sm btn-outline-primary rounded-pill care-option-btn" data-care-name="Medical Equipment Rental" data-care-id="equipment">
+          Rent Equipment
+        </button>
+      </div>
+    </div>
+
+    <!-- Actions & Locality -->
+    <div class="col-lg-3 d-flex align-items-center gap-2 justify-content-lg-end">
+      <select id="careFinderLocality" class="form-select form-select-sm rounded-pill border-primary text-xs" style="max-width: 140px;">
+        <option value="Yeshwanthpur">Yeshwanthpur</option>
+        <option value="Rajajinagar">Rajajinagar</option>
+        <option value="Malleshwaram">Malleshwaram</option>
+        <option value="Hebbal">Hebbal</option>
+        <option value="Peenya">Peenya</option>
+        <option value="Mathikere">Mathikere</option>
+        <option value="All Bengaluru" selected>All Bengaluru</option>
+      </select>
+      <button type="button" id="careFinderConsultBtn" class="btn btn-primary btn-sm rounded-pill fw-bold px-3">
+        Book Now
+      </button>
+    </div>
+  </div>
+</div>

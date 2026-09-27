@@ -1,0 +1,110 @@
+/* ============================================================
+   FLOATING ACTION BUTTONS COMPONENT
+   ============================================================ */
+.floating-actions-desktop,
+.floating-actions {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 2rem;
+  z-index: 1030;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.floating-circle-btn,
+.btn-floating-whatsapp,
+.btn-floating-call {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff !important;
+  box-shadow: var(--shadow-float, 0 10px 25px rgba(0, 0, 0, 0.15));
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+}
+
+.btn-floating-whatsapp {
+  background-color: var(--whatsapp-color, #25D366) !important;
+}
+
+.btn-floating-call {
+  background-color: var(--primary-500, #0A6EBD) !important;
+}
+
+.floating-circle-btn:hover,
+.btn-floating-whatsapp:hover,
+.btn-floating-call:hover {
+  transform: scale(1.1);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25);
+  color: #ffffff !important;
+}
+
+.floating-scroll-top,
+.btn-scroll-top {
+  width: 2.75rem;
+  height: 2.75rem;
+  background-color: #ffffff;
+  color: var(--slate-600, #475569);
+  border: 1px solid var(--slate-200, #e2e8f0);
+  box-shadow: var(--shadow-float, 0 10px 25px rgba(0, 0, 0, 0.15));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.floating-scroll-top.visible,
+.btn-scroll-top.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.floating-scroll-top:hover,
+.btn-scroll-top:hover {
+  color: var(--primary-500, #0A6EBD);
+  border-color: var(--primary-300, #88c5ff);
+  transform: scale(1.1);
+}
+
+.floating-actions-mobile,
+.mobile-bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1030;
+  background-color: #ffffff;
+  border-top: 1px solid var(--slate-200, #e2e8f0);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+}
+
+.mobile-bottom-spacer {
+  height: 4.5rem;
+}
+
+@media (min-width: 768px) {
+  .floating-actions-mobile,
+  .mobile-bottom-bar,
+  .mobile-bottom-spacer {
+    display: none !important;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .floating-actions-desktop,
+  .floating-actions {
+    display: none !important;
+  }
+}
