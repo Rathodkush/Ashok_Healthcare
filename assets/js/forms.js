@@ -8,6 +8,13 @@ document.addEventListener('DOMContentLoaded', () => {
   initCareerForm();
 });
 
+// Universal listener to strictly enforce numbers only and max 10 digits across all phone inputs
+document.addEventListener('input', (e) => {
+  if (e.target && (e.target.type === 'tel' || (e.target.id && e.target.id.toLowerCase().includes('phone')))) {
+    e.target.value = e.target.value.replace(/\D/g, '').slice(0, 10);
+  }
+}, true);
+
 /**
  * Contact Page Enquiry Form
  */
@@ -20,6 +27,13 @@ function initContactForm() {
   const resetBtn = document.getElementById('contactResetBtn');
   const whatsappSendBtn = document.getElementById('contactWhatsAppBtn') || document.getElementById('contactWhatsAppSendBtn');
   const submitBtn = form.querySelector('button[type="submit"]');
+  const phoneInput = document.getElementById('contactPhone');
+
+  if (phoneInput) {
+    phoneInput.addEventListener('input', (e) => {
+      e.target.value = e.target.value.replace(/\D/g, '').slice(0, 10);
+    });
+  }
 
   // Helper for inline alert
   function showInlineAlert(message, type = 'danger') {
@@ -44,7 +58,6 @@ function initContactForm() {
     clearInlineAlert();
 
     const name = (document.getElementById('contactName')?.value || '').trim();
-    const phoneInput = document.getElementById('contactPhone');
     const phone = (phoneInput?.value || '').replace(/\D/g, '');
     const email = (document.getElementById('contactEmail')?.value || '').trim();
     const serviceSelect = document.getElementById('contactService') || document.getElementById('contactServiceSelect');
@@ -57,7 +70,7 @@ function initContactForm() {
       return;
     }
 
-    if (!phone || phone.length < 10) {
+    if (!phone || phone.length !== 10) {
       showInlineAlert('Please enter a valid 10-digit mobile number for immediate response.', 'danger');
       phoneInput?.focus();
       return;
@@ -126,12 +139,18 @@ function initCareerForm() {
   if (!form) return;
 
   const submitBtn = form.querySelector('button[type="submit"]');
+  const phoneInput = document.getElementById('directApplicantPhone');
+
+  if (phoneInput) {
+    phoneInput.addEventListener('input', (e) => {
+      e.target.value = e.target.value.replace(/\D/g, '').slice(0, 10);
+    });
+  }
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
 
     const name = (document.getElementById('directApplicantName')?.value || '').trim();
-    const phoneInput = document.getElementById('directApplicantPhone');
     const phone = (phoneInput?.value || '').replace(/\D/g, '');
     const role = document.getElementById('directApplicantRole')?.value || 'Staff Nurse';
     const qualification = (document.getElementById('directApplicantQualification')?.value || '').trim();
@@ -146,7 +165,7 @@ function initCareerForm() {
       return;
     }
 
-    if (!phone || phone.length < 10) {
+    if (!phone || phone.length !== 10) {
       alert('Please enter a valid 10-digit WhatsApp phone number.');
       phoneInput?.focus();
       return;

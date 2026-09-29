@@ -9,6 +9,13 @@ const SITE_CONFIG = {
   whatsappNumber: '917829753538',
 };
 
+// Universal listener to strictly enforce numbers only and max 10 digits across all modal phone inputs
+document.addEventListener('input', (e) => {
+  if (e.target && (e.target.type === 'tel' || (e.target.id && e.target.id.toLowerCase().includes('phone')))) {
+    e.target.value = e.target.value.replace(/\D/g, '').slice(0, 10);
+  }
+}, true);
+
 // Global Assessment Action - Emergency Call Only (Requirement 2)
 window.openAssessmentModal = function (serviceName) {
   window.location.href = 'tel:' + SITE_CONFIG.phoneRaw;
@@ -98,7 +105,7 @@ function ensureModalsExist() {
                 </div>
                 <div class="col-sm-6">
                   <label class="form-label text-xs fw-bold text-uppercase text-slate-700">Mobile Number *</label>
-                  <input type="tel" id="assessmentPhone" class="form-control form-control-custom" pattern="[0-9]{10}" placeholder="10-digit mobile number" required>
+                  <input type="tel" id="assessmentPhone" class="form-control form-control-custom" pattern="[0-9]{10}" maxlength="10" minlength="10" inputmode="numeric" placeholder="10-digit mobile number" title="Please enter a valid 10-digit mobile number" required>
                 </div>
               </div>
               <div class="row g-3 mb-3">
@@ -190,7 +197,7 @@ function ensureModalsExist() {
               </div>
               <div class="mb-3">
                 <label class="form-label text-xs fw-bold text-uppercase text-slate-700">Phone Number *</label>
-                <input type="tel" id="eqCustomerPhone" class="form-control form-control-custom" pattern="[0-9]{10}" placeholder="10-digit mobile number" required>
+                <input type="tel" id="eqCustomerPhone" class="form-control form-control-custom" pattern="[0-9]{10}" maxlength="10" minlength="10" inputmode="numeric" placeholder="10-digit mobile number" title="Please enter a valid 10-digit mobile number" required>
               </div>
               <div class="mb-3">
                 <label class="form-label text-xs fw-bold text-uppercase text-slate-700">Delivery Locality in Bengaluru</label>
@@ -242,7 +249,7 @@ function ensureModalsExist() {
               </div>
               <div class="mb-3">
                 <label class="form-label text-xs fw-bold text-uppercase text-slate-700">Contact Number *</label>
-                <input type="tel" id="careerApplicantPhone" class="form-control form-control-custom" pattern="[0-9]{10}" placeholder="10-digit mobile number" required>
+                <input type="tel" id="careerApplicantPhone" class="form-control form-control-custom" pattern="[0-9]{10}" maxlength="10" minlength="10" inputmode="numeric" placeholder="10-digit mobile number" title="Please enter a valid 10-digit mobile number" required>
               </div>
               <div class="mb-3">
                 <label class="form-label text-xs fw-bold text-uppercase text-slate-700">Highest Qualification *</label>
@@ -311,7 +318,7 @@ function ensureModalsExist() {
                 <label for="revisitPhone" class="form-label text-xs fw-bold text-uppercase text-slate-700">10-Digit Mobile Number <span class="text-danger">*</span></label>
                 <div class="input-group">
                   <span class="input-group-text bg-light fw-bold text-slate-600 text-xs border-slate-300">+91</span>
-                  <input type="tel" id="revisitPhone" class="form-control form-control-custom" maxlength="10" placeholder="e.g. 9876543210" inputmode="numeric" required>
+                  <input type="tel" id="revisitPhone" class="form-control form-control-custom" pattern="[0-9]{10}" maxlength="10" minlength="10" placeholder="e.g. 9876543210" inputmode="numeric" title="Please enter a valid 10-digit mobile number" required>
                 </div>
                 <div id="revisitPhoneError" class="text-danger text-xs mt-1 d-none fw-semibold">Please enter a valid 10-digit Indian mobile number starting with 6, 7, 8, or 9.</div>
               </div>
@@ -400,6 +407,13 @@ function clearFormAlert(form) {
 function initAssessmentModalEvents() {
   const form = document.getElementById('assessmentForm');
   const whatsappBtn = document.getElementById('assessmentWhatsAppBtn');
+  const phoneInput = document.getElementById('assessmentPhone');
+
+  if (phoneInput) {
+    phoneInput.addEventListener('input', (e) => {
+      e.target.value = e.target.value.replace(/\D/g, '').slice(0, 10);
+    });
+  }
 
   if (form) {
     form.addEventListener('submit', (e) => {
@@ -413,8 +427,9 @@ function initAssessmentModalEvents() {
       const condition = document.getElementById('assessmentCondition').value.trim();
 
       const phoneClean = phone.replace(/[^0-9]/g, '');
-      if (phoneClean.length < 10) {
+      if (phoneClean.length !== 10) {
         showFormAlert(form, '⚠️ Please enter a valid 10-digit mobile number.');
+        document.getElementById('assessmentPhone')?.focus();
         return;
       }
 
@@ -523,6 +538,14 @@ function initEquipmentModalEvents() {
   if (buyBtn) buyBtn.addEventListener('click', () => setEquipmentMode('buy'));
 
   const form = document.getElementById('equipmentQuoteForm');
+  const eqPhoneInput = document.getElementById('eqCustomerPhone');
+
+  if (eqPhoneInput) {
+    eqPhoneInput.addEventListener('input', (e) => {
+      e.target.value = e.target.value.replace(/\D/g, '').slice(0, 10);
+    });
+  }
+
   if (form) {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -535,8 +558,9 @@ function initEquipmentModalEvents() {
       const locality = document.getElementById('eqCustomerLocality').value.trim();
 
       const phoneClean = phone.replace(/[^0-9]/g, '');
-      if (phoneClean.length < 10) {
+      if (phoneClean.length !== 10) {
         showFormAlert(form, '⚠️ Please enter a valid 10-digit mobile number.');
+        document.getElementById('eqCustomerPhone')?.focus();
         return;
       }
 
@@ -592,6 +616,14 @@ function resetEquipmentModal() {
    ============================================================ */
 function initCareerModalEvents() {
   const form = document.getElementById('careerApplyForm');
+  const careerPhoneInput = document.getElementById('careerApplicantPhone');
+
+  if (careerPhoneInput) {
+    careerPhoneInput.addEventListener('input', (e) => {
+      e.target.value = e.target.value.replace(/\D/g, '').slice(0, 10);
+    });
+  }
+
   if (form) {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -605,8 +637,9 @@ function initCareerModalEvents() {
       const location = document.getElementById('careerApplicantLocation').value.trim();
 
       const phoneClean = phone.replace(/[^0-9]/g, '');
-      if (phoneClean.length < 10) {
+      if (phoneClean.length !== 10) {
         showFormAlert(form, '⚠️ Please provide a valid 10-digit contact number.');
+        document.getElementById('careerApplicantPhone')?.focus();
         return;
       }
 
