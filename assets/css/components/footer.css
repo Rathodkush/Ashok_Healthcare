@@ -60,3 +60,34 @@
   object-fit: contain;
   display: block;
 }
+
+/* Mobile responsive enhancements for footer */
+@media (max-width: 991.98px) {
+  .site-footer .footer-company-col,
+  .footer-custom .footer-company-col,
+  .site-footer .row.py-4 > div:nth-child(4),
+  .footer-custom .row.py-4 > div:nth-child(4),
+  .site-footer .row.g-lg-5 > div:nth-child(4) {
+    width: 100% !important;
+    margin-top: 1.25rem !important;
+    padding-top: 1.25rem !important;
+    border-top: 1px solid rgba(51, 65, 85, 0.4) !important;
+  }
+
+  /* Distribute Company & Legal links in 2 balanced columns on mobile */
+  .site-footer .row.py-4 > div:nth-child(4) > ul,
+  .footer-custom .row.py-4 > div:nth-child(4) > ul,
+  .site-footer .row.g-lg-5 > div:nth-child(4) > ul {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.5rem 1rem !important;
+  }
+}
+
+@media (max-width: 767.98px) {
+  /* Ensure comfortable clearance above fixed mobile bottom action bar */
+  .site-footer,
+  .footer-custom {
+    padding-bottom: 5.5rem !important;
+  }
+}
