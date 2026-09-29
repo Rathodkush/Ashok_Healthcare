@@ -6,12 +6,18 @@
 (function () {
   'use strict';
 
-  document.addEventListener('DOMContentLoaded', () => {
+  function initAll() {
     ensureMobileDrawer();
     initMobileDrawer();
     initServicesDropdown();
     highlightActiveNavLink();
-  });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAll);
+  } else {
+    initAll();
+  }
 
   /**
    * Handles desktop services dropdown toggle, hover resilience, and outside clicks
@@ -111,7 +117,7 @@
         <a href="${prefix}about.html" class="mobile-nav-item" data-nav="about">About Us</a>
         
         <div class="mobile-nav-group my-1">
-          <div class="d-flex align-items-center justify-content-between p-2 rounded-3 bg-light mobile-services-toggle" style="cursor: pointer;" role="button" tabindex="0" aria-expanded="false" aria-controls="mobileServicesList">
+          <div class="d-flex align-items-center justify-content-between p-2 rounded-3 bg-light mobile-services-toggle" style="cursor: pointer;" role="button" tabindex="0" aria-expanded="false" aria-controls="mobileServicesList" onclick="toggleMobileServicesMenu(event)">
             <span class="fw-bold text-slate-800 small user-select-none">All Healthcare Services</span>
             <span class="nav-toggle-sub text-slate-600 p-1 d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; pointer-events: none;" aria-hidden="true">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="transition: transform 0.25s ease;"><path d="m6 9 6 6 6-6"/></svg>
@@ -187,26 +193,36 @@
   /**
    * Toggles the mobile services dropdown open and closed reliably
    */
-  function toggleMobileServicesMenu(forceState) {
+  function toggleMobileServicesMenu(e, forceState) {
+    if (e && e.preventDefault) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    if (typeof e === 'boolean') {
+      forceState = e;
+    }
     const list = document.getElementById('mobileServicesList');
-    const toggle = document.querySelector('.mobile-services-toggle');
-    const icon = toggle ? toggle.querySelector('svg') : null;
+    const toggles = document.querySelectorAll('.mobile-services-toggle');
     if (!list) return;
 
-    const isCurrentlyOpen = list.classList.contains('show') || list.classList.contains('open') || list.style.display === 'flex';
+    const isCurrentlyOpen = list.classList.contains('show') || list.classList.contains('open') || window.getComputedStyle(list).display === 'flex';
     const shouldOpen = typeof forceState === 'boolean' ? forceState : !isCurrentlyOpen;
 
     if (shouldOpen) {
       list.classList.add('show', 'open');
       list.style.setProperty('display', 'flex', 'important');
-      if (toggle) toggle.setAttribute('aria-expanded', 'true');
-      if (icon) icon.style.transform = 'rotate(180deg)';
     } else {
       list.classList.remove('show', 'open');
       list.style.setProperty('display', 'none', 'important');
-      if (toggle) toggle.setAttribute('aria-expanded', 'false');
-      if (icon) icon.style.transform = 'rotate(0deg)';
     }
+
+    toggles.forEach(toggle => {
+      toggle.setAttribute('aria-expanded', shouldOpen ? 'true' : 'false');
+      const icon = toggle.querySelector('svg');
+      if (icon) {
+        icon.style.transform = shouldOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+      }
+    });
   }
 
   // Export functions globally
@@ -244,16 +260,18 @@
       // Submenu toggle in drawer (supports tapping anywhere on header row or arrow)
       const subToggle = e.target.closest('.mobile-services-toggle, #toggleMobileSubmenu, .nav-toggle-sub');
       if (subToggle) {
-        e.preventDefault();
-        e.stopPropagation();
-        toggleMobileServicesMenu();
+        toggleMobileServicesMenu(e);
         return;
       }
 
-      // Any navigation link click inside drawer (closes drawer automatically)
+      // Any navigation link click inside drawer
       const navLink = e.target.closest('.mobile-drawer a, .mobile-nav-drawer a');
       if (navLink && !navLink.classList.contains('nav-toggle-sub') && !navLink.classList.contains('mobile-services-toggle')) {
-        closeMobileDrawerAction();
+        const href = navLink.getAttribute('href');
+        if (href && href.startsWith('#')) {
+          closeMobileDrawerAction();
+        }
+        // For external and page navigation links, let browser navigate naturally without aborting
       }
     });
 

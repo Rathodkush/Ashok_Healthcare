@@ -2080,13 +2080,40 @@ img {
 
 /* Dark themed table responsive scrollbar */
 .bg-slate-900 .table-responsive,
-.bg-slate-950 .table-responsive {
-  scrollbar-color: var(--primary-500, #0A6EBD) #1e293b;
+.bg-slate-950 .table-responsive,
+#service-comparison .table-responsive {
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  scrollbar-width: thin !important;
+  scrollbar-color: #38bdf8 #1e293b !important;
+}
+
+.bg-slate-900 .table-responsive::-webkit-scrollbar,
+.bg-slate-950 .table-responsive::-webkit-scrollbar,
+#service-comparison .table-responsive::-webkit-scrollbar {
+  height: 8px !important;
+  display: block !important;
 }
 
 .bg-slate-900 .table-responsive::-webkit-scrollbar-track,
-.bg-slate-950 .table-responsive::-webkit-scrollbar-track {
-  background: #1e293b;
+.bg-slate-950 .table-responsive::-webkit-scrollbar-track,
+#service-comparison .table-responsive::-webkit-scrollbar-track {
+  background: #1e293b !important;
+  border-radius: 4px !important;
+}
+
+.bg-slate-900 .table-responsive::-webkit-scrollbar-thumb,
+.bg-slate-950 .table-responsive::-webkit-scrollbar-thumb,
+#service-comparison .table-responsive::-webkit-scrollbar-thumb {
+  background: #38bdf8 !important;
+  border-radius: 4px !important;
+  border: 1px solid #0284c7 !important;
+}
+
+.bg-slate-900 .table-responsive::-webkit-scrollbar-thumb:hover,
+.bg-slate-950 .table-responsive::-webkit-scrollbar-thumb:hover,
+#service-comparison .table-responsive::-webkit-scrollbar-thumb:hover {
+  background: #0284c7 !important;
 }
 
 /* Global Mobile Responsiveness Guard */
