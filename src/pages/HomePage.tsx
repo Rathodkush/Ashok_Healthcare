@@ -45,10 +45,10 @@ interface HomePageProps {
 }
 
 const trustMetrics = [
-  { value: '10+', label: 'Years Experience', sub: 'Ex-Apollo Leadership', icon: Award, color: 'text-amber-600 bg-amber-50' },
-  { value: '1,800+', label: 'Homes Served', sub: 'Across Bengaluru', icon: Users, color: 'text-blue-600 bg-blue-50' },
-  { value: '< 3 Hrs', label: 'Doorstep Delivery', sub: 'Sanitized ICU Equipment', icon: Truck, color: 'text-emerald-600 bg-emerald-50' },
-  { value: '4.9 ★', label: 'Patient Rating', sub: '187+ Verified Reviews', icon: Star, color: 'text-rose-600 bg-rose-50' },
+  { value: '100000+', label: 'Happy Patients', sub: 'Safely healed at home across Bengaluru', icon: Users, color: 'text-blue-600 bg-blue-50' },
+  { value: '50+', label: 'Qualified Nurses', sub: 'GNM & B.Sc Critical Care Registered', icon: HeartHandshake, color: 'text-purple-600 bg-purple-50' },
+  { value: '100%', label: 'Patient Satisfaction', sub: 'Verified 5-Star Clinical Excellence', icon: ShieldCheck, color: 'text-emerald-600 bg-emerald-50' },
+  { value: '24/7', label: 'Emergency Support', sub: 'Doorstep ICU & Helpline Dispatch', icon: Clock, color: 'text-rose-600 bg-rose-50' },
 ]
 
 const valueProps = [
@@ -891,16 +891,31 @@ export default function HomePage({
 
             {/* Right Story */}
             <div className="lg:col-span-7 space-y-6">
-              <div className="space-y-2">
+              <div className="space-y-3">
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-bold uppercase tracking-widest border border-amber-500/30">
                   <Award size={14} /> Founder & Clinical Leadership
                 </span>
-                <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
-                  {founderData.fullName}
-                </h2>
-                <p className="text-primary-300 font-semibold text-sm">
-                  {founderData.role} — {founderData.organization}
-                </p>
+                <div className="flex items-center gap-4 pt-1">
+                  <div className="w-24 h-32 rounded-xl overflow-hidden border-2 border-primary-400/50 shadow-xl flex-shrink-0 bg-slate-900">
+                    <img
+                      src="/images/PP-e1750937385480.jpeg"
+                      alt="Ashok Doddamani - Founder & CEO, Ashok Healthcare"
+                      className="w-full h-full object-cover object-top"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div>
+                    <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
+                      {founderData.fullName}
+                    </h2>
+                    <p className="text-primary-300 font-semibold text-sm">
+                      {founderData.role} — {founderData.organization}
+                    </p>
+                    <p className="text-slate-400 text-xs mt-1">
+                      (Diploma Nursing, BSc Nursing, BCom, MBA)
+                    </p>
+                  </div>
+                </div>
               </div>
 
               <p className="text-slate-300 text-sm sm:text-base leading-relaxed font-normal">

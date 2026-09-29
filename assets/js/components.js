@@ -156,7 +156,7 @@ function initReviewFilterTabs() {
    5. FAQ INTERACTIVE ACCORDION & LIVE SEARCH
    ============================================================ */
 function initFaqAccordionAndSearch() {
-  const faqCards = document.querySelectorAll('.faq-modern-card, .faq-accordion-item');
+  const faqCards = document.querySelectorAll('.faq-grid-card, .faq-modern-card, .faq-accordion-item');
   const catPills = document.querySelectorAll('.faq-cat-pill');
   const searchInput = document.getElementById('faqSearchInput');
 
@@ -171,15 +171,54 @@ function initFaqAccordionAndSearch() {
       const matchesSearch = !activeSearch || text.includes(activeSearch);
 
       if (matchesCat && matchesSearch) {
-        card.style.display = 'block';
+        card.style.display = '';
       } else {
         card.style.display = 'none';
       }
     });
   }
 
-  // Card Header Click Toggles
+  // Header & Card Click Toggles
   faqCards.forEach((card) => {
+    // 1. Grid Card Accordion (Home page and others)
+    if (card.classList.contains('faq-grid-card')) {
+      const btn = card.querySelector('.faq-question-btn');
+      card.setAttribute('tabindex', '0');
+      card.setAttribute('role', 'region');
+
+      const toggleGridCard = () => {
+        const isOpen = card.classList.contains('is-open');
+        if (isOpen) {
+          card.classList.remove('is-open');
+          if (btn) btn.setAttribute('aria-expanded', 'false');
+        } else {
+          card.classList.add('is-open');
+          if (btn) btn.setAttribute('aria-expanded', 'true');
+        }
+      };
+
+      if (btn) {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          toggleGridCard();
+        });
+      }
+
+      card.addEventListener('click', (e) => {
+        if (e.target.closest('a, button, input, select')) return;
+        toggleGridCard();
+      });
+
+      card.addEventListener('keydown', (e) => {
+        if ((e.target === card || e.target === btn) && (e.key === 'Enter' || e.key === ' ')) {
+          e.preventDefault();
+          toggleGridCard();
+        }
+      });
+      return;
+    }
+
+    // 2. Legacy Modern Card & Accordion Items
     const header = card.querySelector('.faq-modern-card-header, .faq-accordion-header');
     if (header) {
       header.addEventListener('click', () => {
@@ -187,7 +226,7 @@ function initFaqAccordionAndSearch() {
 
         // Close other open cards for clean experience
         faqCards.forEach((other) => {
-          if (other !== card) {
+          if (other !== card && !other.classList.contains('faq-grid-card')) {
             other.classList.remove('active');
             const icon = other.querySelector('.faq-icon');
             if (icon) icon.innerHTML = '+';

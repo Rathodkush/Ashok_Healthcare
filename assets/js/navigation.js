@@ -111,13 +111,13 @@
         <a href="${prefix}about.html" class="mobile-nav-item" data-nav="about">About Us</a>
         
         <div class="mobile-nav-group my-1">
-          <div class="d-flex align-items-center justify-content-between p-2 rounded-3 bg-light">
-            <a href="${prefix}services.html" class="fw-bold text-slate-800 text-decoration-none small">All Healthcare Services</a>
-            <button type="button" id="toggleMobileSubmenu" class="btn btn-sm btn-link text-slate-600 p-0 text-decoration-none nav-toggle-sub" aria-label="Toggle services list">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
-            </button>
+          <div class="d-flex align-items-center justify-content-between p-2 rounded-3 bg-light mobile-services-toggle" style="cursor: pointer;" role="button" tabindex="0" aria-expanded="false" aria-controls="mobileServicesList">
+            <span class="fw-bold text-slate-800 small user-select-none">All Healthcare Services</span>
+            <span class="nav-toggle-sub text-slate-600 p-1 d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; pointer-events: none;" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="transition: transform 0.25s ease;"><path d="m6 9 6 6 6-6"/></svg>
+            </span>
           </div>
-          <div id="mobileServicesList" class="ps-3 d-flex flex-column gap-1 border-start border-2 border-primary-200 ms-2 mt-2">
+          <div id="mobileServicesList" class="mobile-services-list ps-3 flex-column gap-1 border-start border-2 border-primary-200 ms-2 mt-2">
             <a href="${prefix}services/home-nursing.html" class="mobile-nav-subitem">Home Nursing Care</a>
             <a href="${prefix}services/home-icu.html" class="mobile-nav-subitem">Home ICU Setup</a>
             <a href="${prefix}services/rehabilitation.html" class="mobile-nav-subitem">Neuro &amp; Ortho Rehab</a>
@@ -137,9 +137,9 @@
       </div>
 
       <div class="pt-3 border-top d-flex flex-column gap-2 mt-auto flex-shrink-0">
-        <button type="button" onclick="if(window.openAssessmentModal) openAssessmentModal('Home Healthcare'); closeMobileDrawerAction();" class="btn-primary-custom w-100 justify-content-center py-2.5">
-          Book Free Assessment
-        </button>
+        <a href="tel:+917829753538" class="btn-primary-custom w-100 justify-content-center py-2.5 text-decoration-none" aria-label="Emergency Call Desk">
+          Book Assessment
+        </a>
         <a href="tel:+917829753538" class="btn btn-outline-primary w-100 py-2 rounded-pill fw-bold d-flex align-items-center justify-content-center gap-2 text-decoration-none">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           Call +91 78297 53538
@@ -184,8 +184,34 @@
     if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'false');
   }
 
-  // Export close function globally
+  /**
+   * Toggles the mobile services dropdown open and closed reliably
+   */
+  function toggleMobileServicesMenu(forceState) {
+    const list = document.getElementById('mobileServicesList');
+    const toggle = document.querySelector('.mobile-services-toggle');
+    const icon = toggle ? toggle.querySelector('svg') : null;
+    if (!list) return;
+
+    const isCurrentlyOpen = list.classList.contains('show') || list.classList.contains('open') || list.style.display === 'flex';
+    const shouldOpen = typeof forceState === 'boolean' ? forceState : !isCurrentlyOpen;
+
+    if (shouldOpen) {
+      list.classList.add('show', 'open');
+      list.style.setProperty('display', 'flex', 'important');
+      if (toggle) toggle.setAttribute('aria-expanded', 'true');
+      if (icon) icon.style.transform = 'rotate(180deg)';
+    } else {
+      list.classList.remove('show', 'open');
+      list.style.setProperty('display', 'none', 'important');
+      if (toggle) toggle.setAttribute('aria-expanded', 'false');
+      if (icon) icon.style.transform = 'rotate(0deg)';
+    }
+  }
+
+  // Export functions globally
   window.closeMobileDrawerAction = closeMobileDrawerAction;
+  window.toggleMobileServicesMenu = toggleMobileServicesMenu;
 
   /**
    * Initializes event listeners via robust event delegation
@@ -215,32 +241,34 @@
         return;
       }
 
-      // Submenu toggle in drawer
-      const subToggle = e.target.closest('#toggleMobileSubmenu');
+      // Submenu toggle in drawer (supports tapping anywhere on header row or arrow)
+      const subToggle = e.target.closest('.mobile-services-toggle, #toggleMobileSubmenu, .nav-toggle-sub');
       if (subToggle) {
         e.preventDefault();
-        const list = document.getElementById('mobileServicesList');
-        if (list) {
-          const isHidden = list.style.display === 'none';
-          list.style.display = isHidden ? 'flex' : 'none';
-          subToggle.style.transform = isHidden ? 'rotate(0deg)' : 'rotate(180deg)';
-        }
+        e.stopPropagation();
+        toggleMobileServicesMenu();
         return;
       }
 
       // Any navigation link click inside drawer (closes drawer automatically)
       const navLink = e.target.closest('.mobile-drawer a, .mobile-nav-drawer a');
-      if (navLink && !navLink.classList.contains('nav-toggle-sub')) {
+      if (navLink && !navLink.classList.contains('nav-toggle-sub') && !navLink.classList.contains('mobile-services-toggle')) {
         closeMobileDrawerAction();
       }
     });
 
-    // Escape key listener
+    // Keyboard listener for Escape and Enter/Space on toggle
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         const drawer = document.getElementById('mobileDrawer') || document.getElementById('mobileNavDrawer');
         if (drawer && drawer.classList.contains('open')) {
           closeMobileDrawerAction();
+        }
+      }
+      if (e.key === 'Enter' || e.key === ' ') {
+        if (document.activeElement && document.activeElement.classList.contains('mobile-services-toggle')) {
+          e.preventDefault();
+          toggleMobileServicesMenu();
         }
       }
     });
@@ -261,7 +289,7 @@
 
       // Check homepage
       if ((target === 'index.html' || target === '/' || target === './index.html' || target === '../index.html') &&
-          (currentPath.endsWith('/') || currentPath.endsWith('index.html') || currentPath === '')) {
+        (currentPath.endsWith('/') || currentPath.endsWith('index.html') || currentPath === '')) {
         link.classList.add('active');
       } else if (target !== '/' && target !== 'index.html' && target !== '../index.html' && !target.startsWith('#')) {
         const cleanTarget = target.replace('.html', '').replace('../', '').replace('./', '');
@@ -270,5 +298,10 @@
         }
       }
     });
+
+    // Auto-expand services submenu if user is on any service page
+    if (currentPath.includes('/services') || currentPath.includes('services.html')) {
+      toggleMobileServicesMenu(true);
+    }
   }
 })();

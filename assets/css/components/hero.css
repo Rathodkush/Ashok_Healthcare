@@ -3,13 +3,29 @@
    ============================================================ */
 .hero-section {
   position: relative;
-  min-height: 92vh;
+  min-height: 88vh;
   display: flex;
   align-items: center;
   background-color: var(--hero-bg, #EBF4FF);
-  overflow: hidden;
-  padding-top: 6.5rem;
-  padding-bottom: 3rem;
+  overflow-x: clip;
+  overflow-y: visible;
+  padding-top: 8rem;
+  padding-bottom: 3.5rem;
+}
+
+.hero-section h1.display-4 {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.hero-title {
+  font-size: clamp(1.85rem, 3.2vw, 2.85rem);
+  font-weight: 900;
+  color: var(--slate-900, #0f172a);
+  line-height: 1.22;
+  letter-spacing: -0.025em;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .hero-mandala-1 {
@@ -50,6 +66,7 @@
   max-width: 520px;
   margin-left: auto;
   margin-right: auto;
+  margin-top: -9.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -62,6 +79,7 @@
   height: auto;
   max-height: 540px;
   object-fit: contain;
+  object-position: center bottom;
   filter: drop-shadow(0 20px 35px rgba(10, 80, 160, 0.16));
   transition: transform 0.4s ease;
 }
@@ -125,18 +143,24 @@
 }
 
 @keyframes floatUp {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-9px);
   }
 }
 
 @keyframes floatDown {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(8px);
   }
@@ -147,12 +171,15 @@
   background-color: var(--slate-950, #020617);
   position: relative;
   overflow: hidden;
-  padding-top: 5.5rem;
+  padding-top: 6.5rem;
 }
 
 .page-banner-img {
   width: 100%;
-  height: auto;
+  min-height: clamp(140px, 28vw, 360px);
+  max-height: 420px;
+  object-fit: cover;
+  object-position: center;
   display: block;
 }
 
@@ -184,24 +211,27 @@
 }
 
 .hero-pill-support {
-  top: 43%;
-  left: -6%;
+  top: 44%;
+  left: -8%;
 }
 
 .hero-pill-rating {
-  top: 39%;
-  right: -6%;
+  top: 40%;
+  right: -8%;
 }
 
 /* Tablet: scale down floating badges slightly to maintain breathing room */
 @media (min-width: 768px) and (max-width: 991.98px) {
   .hero-section {
-    padding-top: 5.5rem;
+    padding-top: 7.75rem;
+    padding-bottom: 2.75rem;
     min-height: auto;
   }
-  
+
   .hero-image-wrapper {
     max-width: 440px;
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
   }
 
   .floating-badge {
@@ -225,14 +255,26 @@
 /* Mobile: Doctor fully unobstructed, trust pills at top corners, and 2x2 badge grid below */
 @media (max-width: 767.98px) {
   .hero-section {
-    padding-top: 5rem;
-    padding-bottom: 2.5rem;
+    padding-top: 7.25rem;
+    padding-bottom: 2.25rem;
     min-height: auto;
     overflow-x: hidden;
   }
 
+  .hero-section h1.display-4 {
+    font-size: clamp(1.65rem, 6.2vw, 2.15rem) !important;
+    line-height: 1.25 !important;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  .hero-image-wrapper {
+    margin-top: 0.25rem;
+    margin-bottom: 1.25rem;
+  }
+
   .hero-doctor-img {
-    max-height: 350px;
+    max-height: 380px;
     width: auto;
     margin: 0 auto;
     filter: drop-shadow(0 12px 24px rgba(10, 80, 160, 0.14));
@@ -253,15 +295,37 @@
     padding: 0.35rem 0.75rem !important;
   }
 
+  @media (max-width: 480px) {
+    .hero-section {
+      padding-top: 6.85rem;
+    }
+
+    .hero-image-wrapper {
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+
+    .hero-doctor-img {
+      max-height: 330px;
+    }
+  }
+
   @media (max-width: 420px) {
+
     .hero-pill-support,
     .hero-pill-rating {
       font-size: 10px !important;
       padding: 0.25rem 0.5rem !important;
       top: 8px !important;
     }
-    .hero-pill-support { left: 4px !important; }
-    .hero-pill-rating { right: 4px !important; }
+
+    .hero-pill-support {
+      left: 4px !important;
+    }
+
+    .hero-pill-rating {
+      right: 4px !important;
+    }
   }
 
   /* Mobile quick service highlights grid */
@@ -312,4 +376,31 @@
   }
 }
 
+/* Hero Single-Line Service Area Location Bar */
+.hero-location-bar {
+  border-top: 1px solid rgba(148, 163, 184, 0.25);
+  padding-top: 0.85rem;
+  width: 100%;
+}
 
+.hero-location-line {
+  font-size: 0.85rem;
+  color: var(--slate-600, #475569);
+  line-height: 1.55;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+@media (min-width: 1200px) {
+  .hero-location-line {
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 1199.98px) {
+  .hero-location-line {
+    white-space: normal;
+  }
+}

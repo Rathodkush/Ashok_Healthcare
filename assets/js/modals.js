@@ -9,29 +9,11 @@ const SITE_CONFIG = {
   whatsappNumber: '917829753538',
 };
 
-// Global Assessment Modal Opener
+// Global Assessment Action - Emergency Call Only (Requirement 2)
 window.openAssessmentModal = function (serviceName) {
-  ensureModalsExist();
-  const modalEl = document.getElementById('quickAssessmentModal');
-  if (!modalEl) return;
-
-  const serviceSelect = document.getElementById('assessmentServiceSelect');
-  if (serviceSelect && serviceName) {
-    for (let i = 0; i < serviceSelect.options.length; i++) {
-      if (serviceSelect.options[i].text.toLowerCase().includes(serviceName.toLowerCase()) ||
-          serviceSelect.options[i].value.toLowerCase().includes(serviceName.toLowerCase())) {
-        serviceSelect.selectedIndex = i;
-        break;
-      }
-    }
-  }
-
-  // Reset state
-  resetAssessmentModal();
-
-  const bsModal = bootstrap.Modal.getOrCreateInstance(modalEl);
-  bsModal.show();
+  window.location.href = 'tel:' + SITE_CONFIG.phoneRaw;
 };
+
 
 // Global Equipment Quote Modal Opener
 window.openEquipmentModal = function (name, category, mode = 'rent', startingPrice = '') {
@@ -78,7 +60,8 @@ window.openCareerModal = function (jobTitle, qualificationRequired) {
 function ensureModalsExist() {
   if (document.getElementById('quickAssessmentModal') && 
       document.getElementById('equipmentQuoteModal') && 
-      document.getElementById('careerApplyModal')) {
+      document.getElementById('careerApplyModal') &&
+      document.getElementById('revisitEnquiryModal')) {
     return;
   }
 
@@ -299,6 +282,84 @@ function ensureModalsExist() {
     container.appendChild(el.firstElementChild);
     initCareerModalEvents();
   }
+
+  // 4. Revisit / Website Open Enquiry Modal (Requirement 3)
+  if (!document.getElementById('revisitEnquiryModal')) {
+    const el = document.createElement('div');
+    el.innerHTML = `
+    <div class="modal fade" id="revisitEnquiryModal" tabindex="-1" aria-labelledby="revisitEnquiryModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" style="max-width: 460px;">
+        <div class="modal-content modal-content-healthcare border-0 shadow-2xl rounded-4 overflow-hidden">
+          <div class="modal-header modal-header-healthcare px-4 py-3 position-relative" style="background: linear-gradient(135deg, #061833 0%, #073d70 60%, #0858a4 100%);">
+            <div class="d-flex align-items-center gap-3">
+              <span class="fs-4">🩺</span>
+              <div>
+                <h3 class="modal-title h5 fw-bold text-white mb-0" id="revisitEnquiryModalLabel">Enquire About Home Healthcare</h3>
+                <p class="text-white-50 text-xs mb-0">Direct clinical consultation &amp; doorstep ICU support</p>
+              </div>
+            </div>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" id="revisitPopupCloseBtn"></button>
+          </div>
+          <div class="modal-body p-4" id="revisitFormView">
+            <form id="revisitEnquiryForm" novalidate>
+              <div class="mb-3">
+                <label for="revisitName" class="form-label text-xs fw-bold text-uppercase text-slate-700">Patient or Attendant Name <span class="text-danger">*</span></label>
+                <input type="text" id="revisitName" class="form-control form-control-custom" placeholder="e.g. Ramesh Kumar" required>
+                <div id="revisitNameError" class="text-danger text-xs mt-1 d-none fw-semibold">Please enter your name.</div>
+              </div>
+              <div class="mb-3">
+                <label for="revisitPhone" class="form-label text-xs fw-bold text-uppercase text-slate-700">10-Digit Mobile Number <span class="text-danger">*</span></label>
+                <div class="input-group">
+                  <span class="input-group-text bg-light fw-bold text-slate-600 text-xs border-slate-300">+91</span>
+                  <input type="tel" id="revisitPhone" class="form-control form-control-custom" maxlength="10" placeholder="e.g. 9876543210" inputmode="numeric" required>
+                </div>
+                <div id="revisitPhoneError" class="text-danger text-xs mt-1 d-none fw-semibold">Please enter a valid 10-digit Indian mobile number starting with 6, 7, 8, or 9.</div>
+              </div>
+              <div class="mb-3">
+                <label for="revisitService" class="form-label text-xs fw-bold text-uppercase text-slate-700">Service Required (Optional)</label>
+                <select id="revisitService" class="form-select form-select-custom">
+                  <option value="Home Nursing Care">Home Nursing Care (12h / 24h)</option>
+                  <option value="Home ICU Setup">Home ICU Setup &amp; Critical Care</option>
+                  <option value="Neuro & Ortho Rehabilitation">Neuro &amp; Ortho Rehabilitation</option>
+                  <option value="Physiotherapy at Home">Physiotherapy at Home</option>
+                  <option value="Elder Care / Palliative Care">Elder Care / Palliative Care</option>
+                  <option value="Medical Equipment Rental">Medical Equipment Rental / Sales</option>
+                  <option value="24/7 Ambulance Service">24/7 Ambulance Service</option>
+                </select>
+              </div>
+              <div class="py-2 border-top d-flex align-items-center justify-content-between text-xs text-slate-500 mb-3">
+                <span class="text-success fw-bold">✓ Certified Clinical Nurses</span>
+                <span>🔒 100% Medical Confidentiality</span>
+              </div>
+              <div class="d-flex flex-column gap-2">
+                <button type="submit" id="revisitSubmitBtn" class="btn-primary-custom w-100 py-2.5 text-center">
+                  Submit Enquiry
+                </button>
+                <a href="tel:+917829753538" class="btn btn-outline-primary rounded-pill py-2 text-xs fw-bold text-center text-decoration-none">
+                  📞 Or Call Emergency Helpline: +91 78297 53538
+                </a>
+              </div>
+            </form>
+          </div>
+          <div class="modal-body p-4 text-center d-none" id="revisitSuccessView">
+            <div class="rounded-circle bg-success bg-opacity-10 text-success d-inline-flex align-items-center justify-content-center p-3 mb-3" style="width: 64px; height: 64px;">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <h4 class="fw-bold text-slate-900 mb-1">Enquiry Received!</h4>
+            <p class="text-slate-600 small mb-4">
+              Thank you, <strong id="revisitConfirmName">Patient</strong>. Our clinical supervisor will call you at <strong id="revisitConfirmPhone">+91-XXXXXXXXXX</strong> shortly.
+            </p>
+            <div class="d-flex justify-content-center gap-2">
+              <button type="button" id="revisitSuccessWhatsAppBtn" class="btn-whatsapp-custom">Continue on WhatsApp</button>
+              <button type="button" class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+    container.appendChild(el.firstElementChild);
+    initRevisitModalEvents();
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -306,6 +367,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initAssessmentModalEvents();
   initEquipmentModalEvents();
   initCareerModalEvents();
+  initRevisitModalEvents();
 });
 
 /* ============================================================
@@ -593,4 +655,163 @@ function resetCareerModal() {
     clearFormAlert(form);
   }
 }
+
+/* ============================================================
+   4. AUTOMATIC POPUP FORM ON WEBSITE REVISIT (Requirement 3)
+   ============================================================ */
+function initRevisitModalEvents() {
+  const modalEl = document.getElementById('revisitEnquiryModal');
+  if (!modalEl) return;
+
+  const form = document.getElementById('revisitEnquiryForm');
+  const nameInput = document.getElementById('revisitName');
+  const phoneInput = document.getElementById('revisitPhone');
+  const nameError = document.getElementById('revisitNameError');
+  const phoneError = document.getElementById('revisitPhoneError');
+  const serviceSelect = document.getElementById('revisitService');
+  const formView = document.getElementById('revisitFormView');
+  const successView = document.getElementById('revisitSuccessView');
+  const confirmName = document.getElementById('revisitConfirmName');
+  const confirmPhone = document.getElementById('revisitConfirmPhone');
+  const waBtn = document.getElementById('revisitSuccessWhatsAppBtn');
+
+  // Input filter: numbers only, max 10 digits
+  if (phoneInput) {
+    phoneInput.addEventListener('input', (e) => {
+      e.target.value = e.target.value.replace(/\D/g, '').slice(0, 10);
+      if (phoneError) phoneError.classList.add('d-none');
+      phoneInput.classList.remove('is-invalid');
+    });
+  }
+
+  if (nameInput) {
+    nameInput.addEventListener('input', () => {
+      if (nameError) nameError.classList.add('d-none');
+      nameInput.classList.remove('is-invalid');
+    });
+  }
+
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const nameVal = nameInput ? nameInput.value.trim() : '';
+      const phoneVal = phoneInput ? phoneInput.value.trim() : '';
+      const serviceVal = serviceSelect ? serviceSelect.value : 'Home Healthcare';
+      let isValid = true;
+
+      // 1. Validate Name
+      if (!nameVal) {
+        if (nameError) nameError.classList.remove('d-none');
+        if (nameInput) nameInput.classList.add('is-invalid');
+        isValid = false;
+      } else {
+        if (nameError) nameError.classList.add('d-none');
+        if (nameInput) nameInput.classList.remove('is-invalid');
+      }
+
+      // 2. Validate exactly 10 digits beginning with 6, 7, 8, or 9
+      const indianPhoneRegex = /^[6-9]\d{9}$/;
+      if (!indianPhoneRegex.test(phoneVal)) {
+        if (phoneError) phoneError.classList.remove('d-none');
+        if (phoneInput) phoneInput.classList.add('is-invalid');
+        isValid = false;
+      } else {
+        if (phoneError) phoneError.classList.add('d-none');
+        if (phoneInput) phoneInput.classList.remove('is-invalid');
+      }
+
+      // Do not submit the form until all required fields are valid
+      if (!isValid) return;
+
+      const submitBtn = document.getElementById('revisitSubmitBtn');
+      const origText = submitBtn ? submitBtn.innerHTML : 'Submit Enquiry';
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Submitting...';
+      }
+
+      const msg = `Hello Ashok Healthcare,\nI submitted an enquiry for: ${serviceVal}\n- Name: ${nameVal}\n- Mobile: ${phoneVal}\nPlease provide care guidance and nursing availability in Bengaluru.`;
+      form.dataset.whatsappMsg = msg;
+
+      setTimeout(() => {
+        if (formView && successView) {
+          formView.classList.add('d-none');
+          successView.classList.remove('d-none');
+        }
+        if (confirmName) confirmName.textContent = nameVal;
+        if (confirmPhone) confirmPhone.textContent = '+91 ' + phoneVal;
+
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = origText;
+        }
+
+        sessionStorage.setItem('ashok_popup_dismissed_session', 'true');
+        localStorage.setItem('ashok_popup_last_submitted', Date.now().toString());
+      }, 400);
+    });
+  }
+
+  if (waBtn) {
+    waBtn.addEventListener('click', () => {
+      const msg = form && form.dataset.whatsappMsg ? form.dataset.whatsappMsg : 'Hello Ashok Healthcare, I submitted an enquiry on your website.';
+      window.open(`https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent(msg)}`, '_blank');
+    });
+  }
+
+  modalEl.addEventListener('hidden.bs.modal', () => {
+    sessionStorage.setItem('ashok_popup_dismissed_session', 'true');
+    resetRevisitModal();
+  });
+
+  // Schedule popup on fresh visit / revisit
+  scheduleRevisitPopup();
+}
+
+function scheduleRevisitPopup() {
+  // Prevent duplicate popups and intra-session navigation interruptions
+  if (sessionStorage.getItem('ashok_popup_dismissed_session')) return;
+
+  const lastShown = parseInt(localStorage.getItem('ashok_popup_last_shown') || '0', 10);
+  const now = Date.now();
+  const revisitCooldown = 45 * 60 * 1000; // 45-minute revisit cooldown
+  if (now - lastShown < revisitCooldown) return;
+
+  setTimeout(() => {
+    // Prevent modal stacking if user opened another modal or mobile drawer
+    if (document.querySelector('.modal.show') || document.body.classList.contains('modal-open')) return;
+    if (document.body.classList.contains('mobile-drawer-open')) return;
+    if (sessionStorage.getItem('ashok_popup_dismissed_session')) return;
+
+    const modalEl = document.getElementById('revisitEnquiryModal');
+    if (modalEl && typeof bootstrap !== 'undefined' && bootstrap.Modal) {
+      const bsModal = bootstrap.Modal.getOrCreateInstance(modalEl);
+      bsModal.show();
+      localStorage.setItem('ashok_popup_last_shown', now.toString());
+      sessionStorage.setItem('ashok_popup_dismissed_session', 'true');
+    }
+  }, 3500);
+}
+
+function resetRevisitModal() {
+  const formView = document.getElementById('revisitFormView');
+  const successView = document.getElementById('revisitSuccessView');
+  const form = document.getElementById('revisitEnquiryForm');
+  const nameError = document.getElementById('revisitNameError');
+  const phoneError = document.getElementById('revisitPhoneError');
+  const nameInput = document.getElementById('revisitName');
+  const phoneInput = document.getElementById('revisitPhone');
+
+  if (formView && successView) {
+    formView.classList.remove('d-none');
+    successView.classList.add('d-none');
+  }
+  if (form) form.reset();
+  if (nameError) nameError.classList.add('d-none');
+  if (phoneError) phoneError.classList.add('d-none');
+  if (nameInput) nameInput.classList.remove('is-invalid');
+  if (phoneInput) phoneInput.classList.remove('is-invalid');
+}
+
 
