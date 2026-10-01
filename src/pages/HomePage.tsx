@@ -1166,8 +1166,8 @@ export default function HomePage({
               <div
                 key={faq.id || index}
                 className={`bg-white rounded-2xl border transition-all duration-300 overflow-hidden ${isOpen
-                    ? 'border-primary-500 shadow-md ring-1 ring-primary-500/20'
-                    : 'border-slate-200/80 shadow-xs hover:border-primary-300 hover:shadow-sm'
+                  ? 'border-primary-500 shadow-md ring-1 ring-primary-500/20'
+                  : 'border-slate-200/80 shadow-xs hover:border-primary-300 hover:shadow-sm'
                   }`}
               >
                 <button
@@ -1183,8 +1183,8 @@ export default function HomePage({
                   </span>
                   <span
                     className={`p-1.5 rounded-lg shrink-0 pointer-events-none transition-all duration-300 flex items-center justify-center ${isOpen
-                        ? 'bg-primary-100 text-primary-700'
-                        : 'bg-slate-100 text-slate-600'
+                      ? 'bg-primary-100 text-primary-700'
+                      : 'bg-slate-100 text-slate-600'
                       }`}
                   >
                     {isOpen ? <Minus size={16} /> : <Plus size={16} />}
