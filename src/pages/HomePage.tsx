@@ -200,8 +200,8 @@ export default function HomePage({
   const [activeCategory, setActiveCategory] = useState<string>('All')
   const [equipmentCategory, setEquipmentCategory] = useState<string>('All')
   const [activeFaq, setActiveFaq] = useState<number | null>(null)
-  const handleFaqClick = (index: number) => {
-    setActiveFaq(activeFaq === index ? null : index)
+  const toggleFaq = (index: number) => {
+    setActiveFaq((prev) => (prev === index ? null : index))
   }
   const [faqSearch, setFaqSearch] = useState<string>('')
   const [testimonialIdx, setTestimonialIdx] = useState<number>(0)
@@ -1165,29 +1165,27 @@ export default function HomePage({
             return (
               <div
                 key={faq.id || index}
-                className={`bg-white rounded-2xl border transition-all duration-300 overflow-hidden ${
-                  isOpen
+                className={`bg-white rounded-2xl border transition-all duration-300 overflow-hidden ${isOpen
                     ? 'border-primary-500 shadow-md ring-1 ring-primary-500/20'
                     : 'border-slate-200/80 shadow-xs hover:border-primary-300 hover:shadow-sm'
-                }`}
+                  }`}
               >
                 <button
                   type="button"
                   id={`faq-trigger-${index}`}
                   aria-expanded={isOpen}
-                  aria-controls={`faq-collapse-${index}`}
-                  onClick={() => handleFaqClick(index)}
+                  aria-controls={`faq-answer-${index}`}
+                  onClick={() => toggleFaq(index)}
                   className="w-full p-5 text-left font-bold text-slate-900 text-sm sm:text-base flex items-center justify-between gap-4 hover:bg-slate-50/80 active:bg-slate-100 transition-colors cursor-pointer select-none touch-manipulation"
                 >
                   <span className="pointer-events-none transition-colors duration-200 leading-snug">
                     {faq.question}
                   </span>
                   <span
-                    className={`p-1.5 rounded-lg shrink-0 pointer-events-none transition-all duration-300 flex items-center justify-center ${
-                      isOpen
+                    className={`p-1.5 rounded-lg shrink-0 pointer-events-none transition-all duration-300 flex items-center justify-center ${isOpen
                         ? 'bg-primary-100 text-primary-700'
                         : 'bg-slate-100 text-slate-600'
-                    }`}
+                      }`}
                   >
                     {isOpen ? <Minus size={16} /> : <Plus size={16} />}
                   </span>
@@ -1196,7 +1194,7 @@ export default function HomePage({
                 <AnimatePresence initial={false}>
                   {isOpen && (
                     <motion.div
-                      id={`faq-collapse-${index}`}
+                      id={`faq-answer-${index}`}
                       role="region"
                       aria-labelledby={`faq-trigger-${index}`}
                       initial={{ opacity: 0, height: 0 }}
