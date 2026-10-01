@@ -199,9 +199,9 @@ export default function HomePage({
 }: HomePageProps) {
   const [activeCategory, setActiveCategory] = useState<string>('All')
   const [equipmentCategory, setEquipmentCategory] = useState<string>('All')
-  const [activeFaq, setActiveFaq] = useState<string | null>('faq-1')
-  const handleFaqClick = (id: string) => {
-    setActiveFaq((prev) => (prev === id ? null : id))
+  const [activeFaq, setActiveFaq] = useState<number | null>(null)
+  const handleFaqClick = (index: number) => {
+    setActiveFaq(activeFaq === index ? null : index)
   }
   const [faqSearch, setFaqSearch] = useState<string>('')
   const [testimonialIdx, setTestimonialIdx] = useState<number>(0)
@@ -1160,23 +1160,35 @@ export default function HomePage({
         </div>
 
         <div className="space-y-3">
-          {filteredFaqs.map((faq) => {
-            const isOpen = activeFaq === faq.id
+          {filteredFaqs.map((faq, index) => {
+            const isOpen = activeFaq === index
             return (
               <div
-                key={faq.id}
-                className="bg-white rounded-2xl border border-slate-200/80 overflow-hidden shadow-sm transition-all"
+                key={faq.id || index}
+                className={`bg-white rounded-2xl border transition-all duration-300 overflow-hidden ${
+                  isOpen
+                    ? 'border-primary-500 shadow-md ring-1 ring-primary-500/20'
+                    : 'border-slate-200/80 shadow-xs hover:border-primary-300 hover:shadow-sm'
+                }`}
               >
                 <button
                   type="button"
-                  id={`faq-trigger-${faq.id}`}
+                  id={`faq-trigger-${index}`}
                   aria-expanded={isOpen}
-                  aria-controls={`faq-collapse-${faq.id}`}
-                  onClick={() => handleFaqClick(faq.id)}
-                  className="w-full p-5 text-left font-bold text-slate-900 text-sm sm:text-base flex items-center justify-between gap-4 hover:bg-slate-50 cursor-pointer select-none"
+                  aria-controls={`faq-collapse-${index}`}
+                  onClick={() => handleFaqClick(index)}
+                  className="w-full p-5 text-left font-bold text-slate-900 text-sm sm:text-base flex items-center justify-between gap-4 hover:bg-slate-50/80 active:bg-slate-100 transition-colors cursor-pointer select-none touch-manipulation"
                 >
-                  <span className="pointer-events-none">{faq.question}</span>
-                  <span className="p-1 rounded-lg bg-slate-100 text-slate-600 shrink-0 pointer-events-none">
+                  <span className="pointer-events-none transition-colors duration-200 leading-snug">
+                    {faq.question}
+                  </span>
+                  <span
+                    className={`p-1.5 rounded-lg shrink-0 pointer-events-none transition-all duration-300 flex items-center justify-center ${
+                      isOpen
+                        ? 'bg-primary-100 text-primary-700'
+                        : 'bg-slate-100 text-slate-600'
+                    }`}
+                  >
                     {isOpen ? <Minus size={16} /> : <Plus size={16} />}
                   </span>
                 </button>
@@ -1184,16 +1196,18 @@ export default function HomePage({
                 <AnimatePresence initial={false}>
                   {isOpen && (
                     <motion.div
-                      id={`faq-collapse-${faq.id}`}
+                      id={`faq-collapse-${index}`}
                       role="region"
-                      aria-labelledby={`faq-trigger-${faq.id}`}
+                      aria-labelledby={`faq-trigger-${index}`}
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: 'auto' }}
                       exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.3, ease: 'easeInOut' }}
-                      className="px-5 pb-5 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3"
+                      transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                      className="overflow-hidden"
                     >
-                      {faq.answer}
+                      <div className="px-5 pb-5 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
+                        {faq.answer}
+                      </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
