@@ -1437,16 +1437,24 @@ img {
   box-shadow: 0 14px 32px -6px rgba(8, 88, 164, 0.14);
 }
 
+.faq-accordion-heading {
+  margin: 0;
+  padding: 0;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  display: block;
+  width: 100%;
+}
+
 .faq-question-btn {
   background: none;
   border: none;
   padding: 0;
+  margin: 0;
   width: 100%;
   text-align: left;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
+  display: block;
   cursor: pointer;
   color: inherit;
   font: inherit;
@@ -1502,9 +1510,8 @@ img {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 0.85rem;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
+  width: 100%;
+  pointer-events: none;
 }
 
 .faq-grid-num {
@@ -1556,11 +1563,14 @@ img {
 }
 
 .faq-grid-question {
+  display: block;
+  width: 100%;
   font-size: 1.05rem;
   font-weight: 800;
   color: var(--slate-900, #0f172a);
   margin-bottom: 0;
   line-height: 1.4;
+  pointer-events: none;
 }
 
 @media (max-width: 767.98px) {

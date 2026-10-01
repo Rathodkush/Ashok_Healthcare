@@ -2060,20 +2060,22 @@
         <div class="faq-grid">
           <!-- Card 1 (Open by default) -->
           <div class="faq-grid-card is-open">
-            <div class="faq-grid-header">
-              <div class="d-flex align-items-center gap-2">
-                <span class="faq-grid-num">01</span>
-                <span class="faq-grid-badge nursing">Nursing vs Caregiver</span>
-              </div>
-              <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2.5" aria-hidden="true">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </div>
-            <button type="button" class="faq-question-btn" aria-expanded="true">
-              <h3 class="faq-grid-question">What is the difference between a Home Nurse and a Patient Caregiver?</h3>
-            </button>
-            <div class="faq-answer-collapse">
+            <h3 class="faq-accordion-heading">
+              <button type="button" class="faq-question-btn" id="faq-trigger-1" aria-expanded="true" aria-controls="faq-collapse-1">
+                <span class="faq-grid-header">
+                  <span class="d-flex align-items-center gap-2">
+                    <span class="faq-grid-num">01</span>
+                    <span class="faq-grid-badge nursing">Nursing vs Caregiver</span>
+                  </span>
+                  <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2.5" aria-hidden="true">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </span>
+                <span class="faq-grid-question">What is the difference between a Home Nurse and a Patient Caregiver?</span>
+              </button>
+            </h3>
+            <div id="faq-collapse-1" class="faq-answer-collapse" role="region" aria-labelledby="faq-trigger-1">
               <div class="faq-answer-inner">
                 <p class="faq-grid-answer">
                   A Home Nurse (GNM/B.Sc Nursing) is a licensed medical professional who performs clinical procedures
@@ -2087,21 +2089,22 @@
 
           <!-- Card 2 -->
           <div class="faq-grid-card">
-            <div class="faq-grid-header">
-              <div class="d-flex align-items-center gap-2">
-                <span class="faq-grid-num">02</span>
-                <span class="faq-grid-badge equipment">Equipment Delivery</span>
-              </div>
-              <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2.5" aria-hidden="true">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </div>
-            <button type="button" class="faq-question-btn" aria-expanded="false">
-              <h3 class="faq-grid-question">How quickly can medical equipment like hospital beds or oxygen concentrators
-                be delivered?</h3>
-            </button>
-            <div class="faq-answer-collapse">
+            <h3 class="faq-accordion-heading">
+              <button type="button" class="faq-question-btn" id="faq-trigger-2" aria-expanded="false" aria-controls="faq-collapse-2">
+                <span class="faq-grid-header">
+                  <span class="d-flex align-items-center gap-2">
+                    <span class="faq-grid-num">02</span>
+                    <span class="faq-grid-badge equipment">Equipment Delivery</span>
+                  </span>
+                  <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2.5" aria-hidden="true">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </span>
+                <span class="faq-grid-question">How quickly can medical equipment like hospital beds or oxygen concentrators be delivered?</span>
+              </button>
+            </h3>
+            <div id="faq-collapse-2" class="faq-answer-collapse" role="region" aria-labelledby="faq-trigger-2">
               <div class="faq-answer-inner">
                 <p class="faq-grid-answer">
                   Equipment rentals from Ashok Surgical—including oxygen concentrators, hospital beds, and suction
@@ -2114,20 +2117,22 @@
 
           <!-- Card 3 -->
           <div class="faq-grid-card">
-            <div class="faq-grid-header">
-              <div class="d-flex align-items-center gap-2">
-                <span class="faq-grid-num">03</span>
-                <span class="faq-grid-badge critical">4-Hour Substitution</span>
-              </div>
-              <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2.5" aria-hidden="true">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </div>
-            <button type="button" class="faq-question-btn" aria-expanded="false">
-              <h3 class="faq-grid-question">How do you handle staff emergencies or nurse absences?</h3>
-            </button>
-            <div class="faq-answer-collapse">
+            <h3 class="faq-accordion-heading">
+              <button type="button" class="faq-question-btn" id="faq-trigger-3" aria-expanded="false" aria-controls="faq-collapse-3">
+                <span class="faq-grid-header">
+                  <span class="d-flex align-items-center gap-2">
+                    <span class="faq-grid-num">03</span>
+                    <span class="faq-grid-badge critical">4-Hour Substitution</span>
+                  </span>
+                  <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2.5" aria-hidden="true">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </span>
+                <span class="faq-grid-question">How do you handle staff emergencies or nurse absences?</span>
+              </button>
+            </h3>
+            <div id="faq-collapse-3" class="faq-answer-collapse" role="region" aria-labelledby="faq-trigger-3">
               <div class="faq-answer-inner">
                 <p class="faq-grid-answer">
                   Through our 4-Hour Substitution Guarantee, if an assigned nurse is unwell or faces an emergency, our
@@ -2140,21 +2145,22 @@
 
           <!-- Card 4 -->
           <div class="faq-grid-card">
-            <div class="faq-grid-header">
-              <div class="d-flex align-items-center gap-2">
-                <span class="faq-grid-num">04</span>
-                <span class="faq-grid-badge nursing">Qualifications</span>
-              </div>
-              <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2.5" aria-hidden="true">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </div>
-            <button type="button" class="faq-question-btn" aria-expanded="false">
-              <h3 class="faq-grid-question">What qualifications and certifications do your home healthcare nurses hold?
-              </h3>
-            </button>
-            <div class="faq-answer-collapse">
+            <h3 class="faq-accordion-heading">
+              <button type="button" class="faq-question-btn" id="faq-trigger-4" aria-expanded="false" aria-controls="faq-collapse-4">
+                <span class="faq-grid-header">
+                  <span class="d-flex align-items-center gap-2">
+                    <span class="faq-grid-num">04</span>
+                    <span class="faq-grid-badge nursing">Qualifications</span>
+                  </span>
+                  <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2.5" aria-hidden="true">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </span>
+                <span class="faq-grid-question">What qualifications and certifications do your home healthcare nurses hold?</span>
+              </button>
+            </h3>
+            <div id="faq-collapse-4" class="faq-answer-collapse" role="region" aria-labelledby="faq-trigger-4">
               <div class="faq-answer-inner">
                 <p class="faq-grid-answer">
                   All our nurses are qualified GNM (General Nursing and Midwifery) or B.Sc Nursing graduates
@@ -2169,21 +2175,22 @@
 
           <!-- Card 5 -->
           <div class="faq-grid-card">
-            <div class="faq-grid-header">
-              <div class="d-flex align-items-center gap-2">
-                <span class="faq-grid-num">05</span>
-                <span class="faq-grid-badge critical">Doctor Coordination</span>
-              </div>
-              <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2.5" aria-hidden="true">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </div>
-            <button type="button" class="faq-question-btn" aria-expanded="false">
-              <h3 class="faq-grid-question">Can your home nurses coordinate directly with our primary hospital doctor?
-              </h3>
-            </button>
-            <div class="faq-answer-collapse">
+            <h3 class="faq-accordion-heading">
+              <button type="button" class="faq-question-btn" id="faq-trigger-5" aria-expanded="false" aria-controls="faq-collapse-5">
+                <span class="faq-grid-header">
+                  <span class="d-flex align-items-center gap-2">
+                    <span class="faq-grid-num">05</span>
+                    <span class="faq-grid-badge critical">Doctor Coordination</span>
+                  </span>
+                  <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2.5" aria-hidden="true">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </span>
+                <span class="faq-grid-question">Can your home nurses coordinate directly with our primary hospital doctor?</span>
+              </button>
+            </h3>
+            <div id="faq-collapse-5" class="faq-answer-collapse" role="region" aria-labelledby="faq-trigger-5">
               <div class="faq-answer-inner">
                 <p class="faq-grid-answer">
                   Yes. Our clinical team works strictly under the direction of your treating physician. Nurses
@@ -2197,20 +2204,22 @@
 
           <!-- Card 6 -->
           <div class="faq-grid-card">
-            <div class="faq-grid-header">
-              <div class="d-flex align-items-center gap-2">
-                <span class="faq-grid-num">06</span>
-                <span class="faq-grid-badge nursing">Leave Coverage</span>
-              </div>
-              <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2.5" aria-hidden="true">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </div>
-            <button type="button" class="faq-question-btn" aria-expanded="false">
-              <h3 class="faq-grid-question">What happens if the assigned home nurse or caregiver takes leave?</h3>
-            </button>
-            <div class="faq-answer-collapse">
+            <h3 class="faq-accordion-heading">
+              <button type="button" class="faq-question-btn" id="faq-trigger-6" aria-expanded="false" aria-controls="faq-collapse-6">
+                <span class="faq-grid-header">
+                  <span class="d-flex align-items-center gap-2">
+                    <span class="faq-grid-num">06</span>
+                    <span class="faq-grid-badge nursing">Leave Coverage</span>
+                  </span>
+                  <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2.5" aria-hidden="true">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </span>
+                <span class="faq-grid-question">What happens if the assigned home nurse or caregiver takes leave?</span>
+              </button>
+            </h3>
+            <div id="faq-collapse-6" class="faq-answer-collapse" role="region" aria-labelledby="faq-trigger-6">
               <div class="faq-answer-inner">
                 <p class="faq-grid-answer">
                   We offer a 4-Hour Substitution Guarantee. If your primary nurse or attendant is unwell or requests
@@ -2223,21 +2232,22 @@
 
           <!-- Card 7 -->
           <div class="faq-grid-card">
-            <div class="faq-grid-header">
-              <div class="d-flex align-items-center gap-2">
-                <span class="faq-grid-num">07</span>
-                <span class="faq-grid-badge equipment">Rental Terms</span>
-              </div>
-              <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2.5" aria-hidden="true">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </div>
-            <button type="button" class="faq-question-btn" aria-expanded="false">
-              <h3 class="faq-grid-question">Do you offer trial sessions or short-term agreements for medical equipment
-                rentals?</h3>
-            </button>
-            <div class="faq-answer-collapse">
+            <h3 class="faq-accordion-heading">
+              <button type="button" class="faq-question-btn" id="faq-trigger-7" aria-expanded="false" aria-controls="faq-collapse-7">
+                <span class="faq-grid-header">
+                  <span class="d-flex align-items-center gap-2">
+                    <span class="faq-grid-num">07</span>
+                    <span class="faq-grid-badge equipment">Rental Terms</span>
+                  </span>
+                  <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2.5" aria-hidden="true">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </span>
+                <span class="faq-grid-question">Do you offer trial sessions or short-term agreements for medical equipment rentals?</span>
+              </button>
+            </h3>
+            <div id="faq-collapse-7" class="faq-answer-collapse" role="region" aria-labelledby="faq-trigger-7">
               <div class="faq-answer-inner">
                 <p class="faq-grid-answer">
                   Yes. Through Ashok Surgical, we provide flexible rental terms starting from daily and weekly
@@ -2251,21 +2261,22 @@
 
           <!-- Card 8 -->
           <div class="faq-grid-card">
-            <div class="faq-grid-header">
-              <div class="d-flex align-items-center gap-2">
-                <span class="faq-grid-num">08</span>
-                <span class="faq-grid-badge critical">Safety &amp; Hygiene</span>
-              </div>
-              <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2.5" aria-hidden="true">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </div>
-            <button type="button" class="faq-question-btn" aria-expanded="false">
-              <h3 class="faq-grid-question">How do you ensure safety and hygiene for medical equipment delivered to our
-                home?</h3>
-            </button>
-            <div class="faq-answer-collapse">
+            <h3 class="faq-accordion-heading">
+              <button type="button" class="faq-question-btn" id="faq-trigger-8" aria-expanded="false" aria-controls="faq-collapse-8">
+                <span class="faq-grid-header">
+                  <span class="d-flex align-items-center gap-2">
+                    <span class="faq-grid-num">08</span>
+                    <span class="faq-grid-badge critical">Safety &amp; Hygiene</span>
+                  </span>
+                  <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2.5" aria-hidden="true">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </span>
+                <span class="faq-grid-question">How do you ensure safety and hygiene for medical equipment delivered to our home?</span>
+              </button>
+            </h3>
+            <div id="faq-collapse-8" class="faq-answer-collapse" role="region" aria-labelledby="faq-trigger-8">
               <div class="faq-answer-inner">
                 <p class="faq-grid-answer">
                   Every piece of equipment including ventilators, suction machines, and hospital beds undergoes a

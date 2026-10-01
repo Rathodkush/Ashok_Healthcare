@@ -185,95 +185,82 @@ function initFaqAccordionAndSearch() {
     });
   }
 
-  // Header & Card Click Toggles
-  faqCards.forEach((card) => {
-    // 1. Grid Card Accordion (Home page and others)
-    if (card.classList.contains('faq-grid-card')) {
-      const btn = card.querySelector('.faq-question-btn');
-      const header = card.querySelector('.faq-grid-header');
-      card.setAttribute('tabindex', '0');
-      card.setAttribute('role', 'region');
+  // 1. Grid Card Accordion (Home page) - Strict Single-Open Pattern
+  const faqGridCards = document.querySelectorAll('.faq-grid-card');
+  let activeCard = document.querySelector('.faq-grid-card.is-open') || null;
 
-      const toggleGridCard = (forcedState) => {
-        const isOpen = card.classList.contains('is-open');
-        const willOpen = typeof forcedState === 'boolean' ? forcedState : !isOpen;
+  const setActiveCard = (targetCard) => {
+    const shouldClose = (targetCard === activeCard);
 
-        // On mobile viewports (<= 820px), auto-collapse other cards when opening this one for clean reading
-        if (willOpen && window.innerWidth <= 820) {
-          faqCards.forEach((other) => {
-            if (other !== card && other.classList.contains('faq-grid-card') && other.classList.contains('is-open')) {
-              other.classList.remove('is-open');
-              const otherBtn = other.querySelector('.faq-question-btn');
-              if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
-            }
-          });
-        }
+    // Close all cards and reset aria attributes
+    faqGridCards.forEach((c) => {
+      c.classList.remove('is-open');
+      const b = c.querySelector('.faq-question-btn');
+      if (b) b.setAttribute('aria-expanded', 'false');
+    });
 
-        if (willOpen) {
-          card.classList.add('is-open');
-          if (btn) btn.setAttribute('aria-expanded', 'true');
-        } else {
-          card.classList.remove('is-open');
-          if (btn) btn.setAttribute('aria-expanded', 'false');
-        }
-      };
+    // If target was not already open, open it
+    if (!shouldClose && targetCard) {
+      targetCard.classList.add('is-open');
+      const newBtn = targetCard.querySelector('.faq-question-btn');
+      if (newBtn) newBtn.setAttribute('aria-expanded', 'true');
+      activeCard = targetCard;
+    } else {
+      activeCard = null;
+    }
+  };
 
-      // Header click (chevron, badge, number, title bar)
-      if (header) {
-        header.style.cursor = 'pointer';
-        header.addEventListener('click', (e) => {
-          e.stopPropagation();
-          toggleGridCard();
-        });
-      }
+  faqGridCards.forEach((card) => {
+    const triggerBtn = card.querySelector('.faq-question-btn');
 
-      // Question button click
-      if (btn) {
-        btn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          toggleGridCard();
-        });
-      }
-
-      // Card-level click handler (ignore clicks on answer content to allow mobile scrolling & text selection)
-      card.addEventListener('click', (e) => {
-        if (e.target.closest('.faq-answer-collapse')) return;
-        if (e.target.closest('a, button, input, select')) return;
-        toggleGridCard();
+    if (triggerBtn) {
+      triggerBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setActiveCard(card);
       });
-
-      card.addEventListener('keydown', (e) => {
-        if ((e.target === card || e.target === btn) && (e.key === 'Enter' || e.key === ' ')) {
-          e.preventDefault();
-          toggleGridCard();
-        }
-      });
-      return;
     }
 
-    // 2. Legacy Modern Card & Accordion Items
+    // Header or card padding click fallback
+    card.addEventListener('click', (e) => {
+      // Do not collapse when clicking inside the answer content (allows text selection & scrolling)
+      if (e.target.closest('.faq-answer-collapse')) return;
+      if (e.target.closest('.faq-question-btn')) return;
+      setActiveCard(card);
+    });
+
+    // Keyboard support on card if focused directly
+    card.addEventListener('keydown', (e) => {
+      if (e.target === card && (e.key === 'Enter' || e.key === ' ')) {
+        e.preventDefault();
+        setActiveCard(card);
+      }
+    });
+  });
+
+  // 2. Legacy Modern Card & Accordion Items (if present on any subpages)
+  const otherFaqCards = document.querySelectorAll('.faq-modern-card, .faq-accordion-item');
+  let activeOtherCard = document.querySelector('.faq-modern-card.active, .faq-accordion-item.active') || null;
+
+  otherFaqCards.forEach((card) => {
     const header = card.querySelector('.faq-modern-card-header, .faq-accordion-header');
     if (header) {
-      header.addEventListener('click', () => {
-        const isActive = card.classList.contains('active');
+      header.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const shouldClose = (card === activeOtherCard);
 
-        // Close other open cards for clean experience
-        faqCards.forEach((other) => {
-          if (other !== card && !other.classList.contains('faq-grid-card')) {
-            other.classList.remove('active');
-            const icon = other.querySelector('.faq-icon');
-            if (icon) icon.innerHTML = '+';
-          }
+        otherFaqCards.forEach((other) => {
+          other.classList.remove('active');
+          const icon = other.querySelector('.faq-icon');
+          if (icon) icon.innerHTML = '+';
         });
 
-        if (isActive) {
-          card.classList.remove('active');
-          const icon = card.querySelector('.faq-icon');
-          if (icon) icon.innerHTML = '+';
-        } else {
+        if (!shouldClose) {
           card.classList.add('active');
           const icon = card.querySelector('.faq-icon');
           if (icon) icon.innerHTML = '−';
+          activeOtherCard = card;
+        } else {
+          activeOtherCard = null;
         }
       });
     }

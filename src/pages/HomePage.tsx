@@ -199,8 +199,10 @@ export default function HomePage({
 }: HomePageProps) {
   const [activeCategory, setActiveCategory] = useState<string>('All')
   const [equipmentCategory, setEquipmentCategory] = useState<string>('All')
-  const [reviewFilter, setReviewFilter] = useState<string>('All')
-  const [openFaq, setOpenFaq] = useState<string | null>('faq-1')
+  const [activeFaq, setActiveFaq] = useState<string | null>('faq-1')
+  const handleFaqClick = (id: string) => {
+    setActiveFaq((prev) => (prev === id ? null : id))
+  }
   const [faqSearch, setFaqSearch] = useState<string>('')
   const [testimonialIdx, setTestimonialIdx] = useState<number>(0)
 
@@ -1159,28 +1161,36 @@ export default function HomePage({
 
         <div className="space-y-3">
           {filteredFaqs.map((faq) => {
-            const isOpen = openFaq === faq.id
+            const isOpen = activeFaq === faq.id
             return (
               <div
                 key={faq.id}
                 className="bg-white rounded-2xl border border-slate-200/80 overflow-hidden shadow-sm transition-all"
               >
                 <button
-                  onClick={() => setOpenFaq(isOpen ? null : faq.id)}
-                  className="w-full p-5 text-left font-bold text-slate-900 text-sm sm:text-base flex items-center justify-between gap-4 hover:bg-slate-50"
+                  type="button"
+                  id={`faq-trigger-${faq.id}`}
+                  aria-expanded={isOpen}
+                  aria-controls={`faq-collapse-${faq.id}`}
+                  onClick={() => handleFaqClick(faq.id)}
+                  className="w-full p-5 text-left font-bold text-slate-900 text-sm sm:text-base flex items-center justify-between gap-4 hover:bg-slate-50 cursor-pointer select-none"
                 >
-                  <span>{faq.question}</span>
-                  <span className="p-1 rounded-lg bg-slate-100 text-slate-600 shrink-0">
+                  <span className="pointer-events-none">{faq.question}</span>
+                  <span className="p-1 rounded-lg bg-slate-100 text-slate-600 shrink-0 pointer-events-none">
                     {isOpen ? <Minus size={16} /> : <Plus size={16} />}
                   </span>
                 </button>
 
-                <AnimatePresence>
+                <AnimatePresence initial={false}>
                   {isOpen && (
                     <motion.div
+                      id={`faq-collapse-${faq.id}`}
+                      role="region"
+                      aria-labelledby={`faq-trigger-${faq.id}`}
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: 'auto' }}
                       exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.3, ease: 'easeInOut' }}
                       className="px-5 pb-5 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3"
                     >
                       {faq.answer}
