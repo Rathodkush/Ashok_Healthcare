@@ -45,7 +45,7 @@ interface HomePageProps {
 }
 
 const trustMetrics = [
-  { value: '100000+', label: 'Happy Patients', sub: 'Safely healed at home across Bengaluru', icon: Users, color: 'text-blue-600 bg-blue-50' },
+  { value: '10000+', label: 'Happy Patients', sub: 'Safely healed at home across Bengaluru', icon: Users, color: 'text-blue-600 bg-blue-50' },
   { value: '50+', label: 'Qualified Nurses', sub: 'GNM & B.Sc Critical Care Registered', icon: HeartHandshake, color: 'text-purple-600 bg-purple-50' },
   { value: '100%', label: 'Patient Satisfaction', sub: 'Verified 5-Star Clinical Excellence', icon: ShieldCheck, color: 'text-emerald-600 bg-emerald-50' },
   { value: '24/7', label: 'Emergency Support', sub: 'Doorstep ICU & Helpline Dispatch', icon: Clock, color: 'text-rose-600 bg-rose-50' },

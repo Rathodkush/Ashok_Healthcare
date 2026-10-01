@@ -3,16 +3,23 @@
  * CareFinder widget, Category filter tabs, FAQ search and accordion, Review filter tabs
  */
 
-document.addEventListener('DOMContentLoaded', () => {
-  initCareFinderWidget();
-  initServiceFilterTabs();
-  initEquipmentFilterTabs();
-  initReviewFilterTabs();
-  initFaqAccordionAndSearch();
-  initPhysioScrollReveal();
-  initHeroFloatingBadges();
-  initStatsCounter();
-});
+function initAllComponents() {
+  try { initCareFinderWidget(); } catch (err) { console.warn('CareFinder init error:', err); }
+  try { initServiceFilterTabs(); } catch (err) { console.warn('ServiceFilter init error:', err); }
+  try { initEquipmentFilterTabs(); } catch (err) { console.warn('EquipmentFilter init error:', err); }
+  try { initReviewFilterTabs(); } catch (err) { console.warn('ReviewFilter init error:', err); }
+  try { initFaqAccordionAndSearch(); } catch (err) { console.warn('FAQ init error:', err); }
+  try { initPhysioScrollReveal(); } catch (err) { console.warn('PhysioScroll init error:', err); }
+  try { initHeroFloatingBadges(); } catch (err) { console.warn('HeroFloatingBadges init error:', err); }
+  try { initStatsCounter(); } catch (err) { console.warn('StatsCounter init error:', err); }
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initAllComponents);
+} else {
+  initAllComponents();
+}
+
 
 
 /* ============================================================
@@ -183,20 +190,44 @@ function initFaqAccordionAndSearch() {
     // 1. Grid Card Accordion (Home page and others)
     if (card.classList.contains('faq-grid-card')) {
       const btn = card.querySelector('.faq-question-btn');
+      const header = card.querySelector('.faq-grid-header');
       card.setAttribute('tabindex', '0');
       card.setAttribute('role', 'region');
 
-      const toggleGridCard = () => {
+      const toggleGridCard = (forcedState) => {
         const isOpen = card.classList.contains('is-open');
-        if (isOpen) {
-          card.classList.remove('is-open');
-          if (btn) btn.setAttribute('aria-expanded', 'false');
-        } else {
+        const willOpen = typeof forcedState === 'boolean' ? forcedState : !isOpen;
+
+        // On mobile viewports (<= 820px), auto-collapse other cards when opening this one for clean reading
+        if (willOpen && window.innerWidth <= 820) {
+          faqCards.forEach((other) => {
+            if (other !== card && other.classList.contains('faq-grid-card') && other.classList.contains('is-open')) {
+              other.classList.remove('is-open');
+              const otherBtn = other.querySelector('.faq-question-btn');
+              if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
+            }
+          });
+        }
+
+        if (willOpen) {
           card.classList.add('is-open');
           if (btn) btn.setAttribute('aria-expanded', 'true');
+        } else {
+          card.classList.remove('is-open');
+          if (btn) btn.setAttribute('aria-expanded', 'false');
         }
       };
 
+      // Header click (chevron, badge, number, title bar)
+      if (header) {
+        header.style.cursor = 'pointer';
+        header.addEventListener('click', (e) => {
+          e.stopPropagation();
+          toggleGridCard();
+        });
+      }
+
+      // Question button click
       if (btn) {
         btn.addEventListener('click', (e) => {
           e.stopPropagation();
@@ -204,7 +235,9 @@ function initFaqAccordionAndSearch() {
         });
       }
 
+      // Card-level click handler (ignore clicks on answer content to allow mobile scrolling & text selection)
       card.addEventListener('click', (e) => {
+        if (e.target.closest('.faq-answer-collapse')) return;
         if (e.target.closest('a, button, input, select')) return;
         toggleGridCard();
       });

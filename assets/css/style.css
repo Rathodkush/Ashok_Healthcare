@@ -1415,6 +1415,15 @@ img {
   position: relative;
   border-left: 4px solid var(--primary-600, #0858a4);
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+@media (max-width: 767.98px) {
+  .faq-grid-card {
+    padding: 1.25rem 1.15rem;
+    border-radius: 1rem;
+  }
 }
 
 .faq-grid-card:hover {
@@ -1441,6 +1450,8 @@ img {
   cursor: pointer;
   color: inherit;
   font: inherit;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .faq-question-btn:focus-visible {
@@ -1455,6 +1466,7 @@ img {
   stroke: var(--primary-600, #0858a4);
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), stroke 0.3s ease;
   flex-shrink: 0;
+  pointer-events: none;
 }
 
 .faq-grid-card.is-open .faq-chevron {
@@ -1465,13 +1477,18 @@ img {
 .faq-answer-collapse {
   display: grid;
   grid-template-rows: 0fr;
-  transition: grid-template-rows 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+  max-height: 0;
+  transition: grid-template-rows 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.25s ease;
   opacity: 0;
   overflow: hidden;
+  will-change: max-height, opacity;
 }
 
 .faq-grid-card.is-open .faq-answer-collapse {
   grid-template-rows: 1fr;
+  max-height: 1000px;
   opacity: 1;
 }
 
@@ -1485,6 +1502,9 @@ img {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 0.85rem;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .faq-grid-num {
@@ -1541,6 +1561,13 @@ img {
   color: var(--slate-900, #0f172a);
   margin-bottom: 0;
   line-height: 1.4;
+}
+
+@media (max-width: 767.98px) {
+  .faq-grid-question {
+    font-size: 0.96rem;
+    line-height: 1.45;
+  }
 }
 
 .faq-grid-answer {
